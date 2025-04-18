@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body, html
+  {
+    height: 100%;
+    width: 100%;
+  }
+
+  .welcome-wrapper
+  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-image: url(welcome.jpg);
+    gap:30px;
+
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+    ),
+    url(welcome.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+  }
+
+  h1{
+    font-family: "Modern Antiqua", serif;
+    font-size: clamp(32px, 6vw, 64px);
+    color: #ffffff;
+  }
+
+  h2{
+    font-family: "Inika", serif;
+    font-size: clamp(16px, 3vw, 32px);
+    color: #ffffff;
+  }
+
+  h3{
+    font-family: "Kalam", cursive;
+    font-size: clamp(10px, 2vw, 18px);
+    color: #ffffff;
+  }
+
+  .welcome-button
+  {
+    font-family: "Modern Antiqua", serif;
+    padding: 1rem 2rem;
+    min-width: 400px;
+    font-size: clamp(16px, 2.5vw, 20px);
+    border-radius: 1.7rem;
+    border: 1px solid white;
+    width: 100%;
+    max-width: 220px;
+    background-color: #9E2A29;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 1);
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .welcome-button:active {
+    background-color: #C63433;
+    color: #ffffff;
+  }
