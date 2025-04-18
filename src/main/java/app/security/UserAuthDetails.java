@@ -19,7 +19,8 @@ public class UserAuthDetails implements UserDetails {
     private String username;
     private String password;
     private String email;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private UserRole role;
     private boolean isActive;
 

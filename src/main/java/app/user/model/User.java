@@ -2,6 +2,8 @@ package app.user.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -9,6 +11,8 @@ import java.util.UUID;
 @Data
 
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 
@@ -26,7 +30,10 @@ public abstract class User {
     private String password;
 
     @Column(nullable = false)
-    private String fullName;
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
 
     @Column(nullable = false)
     private LocalDateTime createdOn;
