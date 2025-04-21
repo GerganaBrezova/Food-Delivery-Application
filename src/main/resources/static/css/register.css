@@ -59,7 +59,9 @@ form input {
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
 
-  form button[type="submit"] {
+   .login-btn{
+    display: inline-block;
+    text-align: center;
     margin-top: 10px;
     width: 100%;
     padding: 15px;
@@ -68,11 +70,12 @@ form input {
     background: #CF7777;
     color: white;
     font-weight: bold;
+    text-decoration: none;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
 
-  form button:hover {
+  .login-btn {
     background: #521615;
   }
 

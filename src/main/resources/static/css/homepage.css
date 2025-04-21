@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .welcome-title {
+    font-size: 2em;
+    color: #eae8e8;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.welcome-text {
+    font-size: 1em;
+    color: #eae8e8;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+  .main-header {
+    width: 100%;
+    display: flex;
+    background: #531c1c;
+    padding: 0px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .header-left{
+    margin: 0;
+    padding: 0;
+
+  }
+
+  .header-left img {
+    width: 450px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+
+  }
+
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+
+  .header-nav {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: left;
+
+  }
+
+  .nav-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-button:hover {
+    background-color: #ddd;
+  }
+
+  .top-controls {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+
+  .add-button {
+    padding: 10px 18px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 30%;
+    border: none;
+    background-color: #531c1c;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+
+  .add-button:hover {
+    background-color: #45a049;
+  }
+
+  .brands-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 95%;
+    max-width: 1200px;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .brand-card {
+    background-color: #eee;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s ease;
+  }
+
+  .brand-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .brand-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .brand-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+
+  .brand-info p {
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  .start-day {
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  .start-button {
+    padding: 40px 30px;
+    font-size: 20px;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+
+  }
+
+  .start-button:hover {
+    background-color: #45a049;
+  }
+
+  .start-day-title {
+    font-weight: bold;
+    font-size: 26px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 20px;
+  }
+
+  .start-day-message {
+    font-weight: bold;
+    font-size: 16px;
+    color: #444;
+    margin-top: 20px;
+  }
