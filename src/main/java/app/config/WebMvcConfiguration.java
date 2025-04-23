@@ -1,6 +1,5 @@
 package app.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,18 +8,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class WebMvcConfiguration {
-
-    private final CustomLoginSuccessHandler successHandler;
-
-    @Autowired
-    public WebMvcConfiguration(CustomLoginSuccessHandler successHandler) {
-        this.successHandler = successHandler;
-    }
+public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -32,7 +25,7 @@ public class WebMvcConfiguration {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .successHandler(successHandler)
+                        .defaultSuccessUrl("/home")
                         .failureUrl("/login?error")
                         .permitAll())
                 .logout(logout -> logout
@@ -41,6 +34,5 @@ public class WebMvcConfiguration {
                 );
 
         return http.build();
-
     }
 }

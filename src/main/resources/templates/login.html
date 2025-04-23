@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Modern+Antiqua&display=swap" rel="stylesheet">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="/css/login.css" />
 </head>
 <body>
 <div class="login-container">
     <div class="login-left">
-        <h1>Welcome Back!</h2>
+        <h1>Welcome Back!</h1>
             <br>
             <h3>Log in to access your personalized food delivery dashboard.</h3>
             <form action="#">
@@ -25,7 +25,7 @@
                 <input type="password" id="password" name="password" required placeholder="Password">
                 <br><br>
 
-                <a href="homepage.html" class="login-btn">Log In</a>
+                <button type="submit" class="login-btn">Log In</button>
 
                 <br>
                 <br>
@@ -34,9 +34,9 @@
 
                 <p class="no-account">
                     Don't have an account?
-                    <a href="register.html">Sign up</a>
-
+                    <a th:href="@{/register}">Sign up</a>
                 </p>
+
             </form>
     </div>
 

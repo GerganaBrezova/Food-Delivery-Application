@@ -27,7 +27,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String getIndexPage() {
-        return "index";
+        return "welcome";
     }
 
     @GetMapping("/register")
