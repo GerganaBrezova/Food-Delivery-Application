@@ -13,16 +13,17 @@
         <h1>Welcome Back!</h1>
             <br>
             <h3>Log in to access your personalized food delivery dashboard.</h3>
-            <form action="#">
+            <form th:action="@{/login}" th:method="POST" th:object="${loginRequest}">
                 <br>
-                <label for="email">Email</label>
+                <label for="username">Username</label>
                 <br>
-                <input type="email" id="email" name="email" required placeholder="Email">
+                <input type="text" id="username" name="username" required placeholder="Username" th:field="*{username}">
                 <br><br>
 
                 <label for="password">Password</label>
                 <br>
-                <input type="password" id="password" name="password" required placeholder="Password">
+                <input type="password" id="password" name="password" required placeholder="Password" th:field="*{password}">
+                <small th:if="${errorMessage}" th:text="${errorMessage}"></small>
                 <br><br>
 
                 <button type="submit" class="login-btn">Log In</button>

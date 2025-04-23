@@ -12,36 +12,42 @@
     <div class="login-left">
 
         <h3>Sign up for fast, fresh food delivery:</h3>
-        <form action="#">
+        <form th:action="@{/register}" th:method="POST" th:object="${registerRequest}">
             <br>
             <label for="firstname">First Name</label>
             <br>
-            <input type="text" id="firstname" name="name" required placeholder="First Name">
+            <input type="text" id="firstname" name="name" required placeholder="First Name" th:field="*{firstName}">
+            <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
             <br><br>
 
             <label for="lastname">Last Name</label>
             <br>
-            <input type="text" id="lastname" name="name" required placeholder="Last Name">
+            <input type="text" id="lastname" name="name" required placeholder="Last Name" th:field="*{lastName}">
+            <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
             <br><br>
 
             <label for="email">Email</label>
             <br>
-            <input type="email" id="email" name="email" required placeholder="Email">
+            <input type="email" id="email" name="email" required placeholder="Email" th:field="*{email}">
+            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
             <br><br>
 
             <label for="username">Username</label>
             <br>
-            <input type="text" id="username" name="username" required placeholder="Username">
+            <input type="text" id="username" name="username" required placeholder="Username" th:field="*{username}">
+            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
             <br><br>
 
             <label for="password">Password</label>
             <br>
-            <input type="password" id="password" name="password" required placeholder="Password">
+            <input type="password" id="password" name="password" required placeholder="Password" th:field="*{password}">
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
             <br><br>
 
             <label for="confirmPassword">Confirm Password</label>
             <br>
-            <input type="password" id="confirmPassword" name="password" required placeholder="Confirm Password">
+            <input type="password" id="confirmPassword" name="password" required placeholder="Confirm Password" th:field="*{confirmPassword}">
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
             <br><br>
 
             <button type="submit">Sign Up</button>
