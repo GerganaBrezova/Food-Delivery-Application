@@ -79,13 +79,13 @@ public class IndexController {
         return modelAndView;
     }
 
-    @GetMapping("/courier/home")
+    @GetMapping("/home")
     public ModelAndView getCourierHomePage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("courier-home");
+        modelAndView.setViewName("home");
         modelAndView.addObject("user", user);
 
         return modelAndView;
