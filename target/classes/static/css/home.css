@@ -111,6 +111,7 @@
     background-color: #45a049;
   }
 
+
   .brands-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -119,6 +120,10 @@
     max-width: 1200px;
     justify-content: center;
     padding: 20px;
+  }
+  .brand-link {
+      text-decoration: none;
+      display: block;
   }
 
   .brand-card {

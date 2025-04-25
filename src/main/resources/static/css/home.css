@@ -108,8 +108,14 @@
   }
 
   .add-button:hover {
-    background-color: #45a049;
+    background-color: #EA6463;
   }
+
+.brand-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
 
   .brands-container {
     display: grid;
@@ -121,7 +127,7 @@
     padding: 20px;
   }
 
-  .brand-card {
+  .brands-container.brand-card {
     background-color: #eee;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
