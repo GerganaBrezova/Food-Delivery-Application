@@ -25,6 +25,12 @@ public class Company {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private String logoUrl;
+
     @OneToMany(mappedBy = "company")
     private List<Restaurant> restaurants;
 }
