@@ -15,54 +15,75 @@ body
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .login-container
 {
     display: flex;
-    width: 60%;
-    max-width: 1000px;
-    height: 95vh;
-    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    flex-direction: column;
+    overflow: auto;
     background-color: #531c1c;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     border-radius: 20px;
 
 }
 
+@media (min-width: 768px) {
+  .login-container {
+    flex-direction: row;
+    height: auto;
+  }
+}
+
+.login-left,
+.login-right {
+  flex: 1;
+  min-height: 300px;
+}
+
 .login-left
 {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: white;
-
+    padding: 30px;
+    overflow-y: auto;
+    max-height: 100vh;
 
 }
+
+
 .login-left h3{
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 3px;
+  padding-bottom: 20px;
+  text-align: center;
+    }
 
-    text-align: center;}
-
-
+form {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
 
 form input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-top: 10px;
     border: none;
     border-radius: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    font-size: 16px;
   }
 
    .login-btn{
     display: inline-block;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
     width: 100%;
     padding: 15px;
     border: 1px solid white;
@@ -73,21 +94,22 @@ form input {
     text-decoration: none;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    font-size: 16px;
+    background: #521615;
   }
 
-  .login-btn {
-    background: #521615;
+
+  .login-btn:hover {
+    background: #772e2e;
   }
 
 
 .login-right
 {
-    flex: 1;
     background-image: url(../images/register.jpg);
     background-size: cover;
     background-position: center;
-    border-radius: 20px;
-    margin: 10px;
+
 }
 
 small {
