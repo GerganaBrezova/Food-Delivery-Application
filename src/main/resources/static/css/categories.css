@@ -111,88 +111,71 @@
     background-color: #EA6463;
   }
 
-.brand-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-}
-
-  .brands-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  .categories-container {
     gap: 25px;
     width: 95%;
     max-width: 1200px;
     justify-content: center;
-    padding: 20px;
+    padding: 40px 20px;
   }
 
-  .brands-container.brand-card {
-    background-color: #eee;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
-    transition: transform 0.3s ease;
-  }
-
-  .brand-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .brand-card img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-bottom: 10px;
-  }
-
-  .brand-info h3 {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
-
-  .brand-info p {
-    font-size: 0.9em;
-    color: #555;
-  }
-
-  .start-day {
-    margin: 30px 0;
-    text-align: center;
-  }
-
-  .start-button {
-    padding: 40px 30px;
-    font-size: 20px;
+  .category-link {
     text-decoration: none;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    cursor: pointer;
-
-  }
-
-  .start-button:hover {
-    background-color: #45a049;
-  }
-
-  .start-day-title {
-    font-weight: bold;
-    font-size: 26px;
-    color: #444;
+    color: inherit;
+    display: block;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
     margin-bottom: 20px;
   }
 
-  .start-day-message {
+  .category-link:hover {
+    transform: scale(1.03);
+  }
+
+  .category-card {
+    height: 180px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+  }
+
+
+  .category-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    border-radius: 20px;
+  }
+
+
+  .category-title {
+    position: relative;
+    font-size: 1.8em;
     font-weight: bold;
-    font-size: 16px;
-    color: #444;
-    margin-top: 20px;
+    color: #fff;
+    z-index: 1;
+  }
+
+
+  .appetizers {
+    background-image: url('appetizer.jpg');
+  }
+
+  .main {
+    background-image: url('main.jpg');
+  }
+
+  .desserts {
+    background-image: url('dessert.jpg');
+  }
+
+  .drinks {
+    background-image: url('drinks.jpg');
   }

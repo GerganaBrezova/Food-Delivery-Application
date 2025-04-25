@@ -40,7 +40,7 @@
 </form>
 
 <main class="brands-container" th:if="${user.role.name() == 'EMPLOYEE' or user.role.name() == 'CUSTOMER'}">
-<a href="#" class="brand-link" >
+<a href="categories.html" class="brand-link" >
     <div class="brand-card" th:each="company : ${allCompanies}">
         <img th:src="${company.logoUrl}" th:alt="${company.name}" />
         <div class="brand-info">
