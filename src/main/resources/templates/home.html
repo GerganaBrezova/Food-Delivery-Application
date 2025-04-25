@@ -23,20 +23,23 @@
             <br>
             <br>
             <nav class="header-nav">
-                <a href="#" class="nav-button"><i class="fas fa-home"></i> Home</a>
+                <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
                 <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
-                <a href="#" class="nav-button"><i class="fas fa-chart-bar"></i> Statistics</a>
+                <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
+                    <i class="fas fa-chart-bar"></i>
+                    Statistics
+                </a>
                 <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
                 <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
             </nav>
     </div>
 </header>
 
-<div class="top-controls">
+<form class="top-controls" th:if="${user.role.name() == 'EMPLOYEE'}">
     <button class="add-button">+</button>
-</div>
+</form>
 
-<main class="brands-container">
+<main class="brands-container" th:if="${user.role.name() == 'EMPLOYEE' or user.role.name() == 'CUSTOMER'}">
 
     <div class="brand-card">
         <img src="https://cdn-icons-png.flaticon.com/512/5977/5977588.png" alt="Brand 1" />
@@ -135,7 +138,7 @@
     </div>
 </main>
 
-<div class="start-day">
+<div class="start-day" th:if="${user.role.name() == 'COURIER'}">
     <h2 class="start-day-title">Ready to start your day?</h2>
     <br>
     <br>
