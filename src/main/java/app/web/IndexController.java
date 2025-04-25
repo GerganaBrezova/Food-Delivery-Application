@@ -1,5 +1,7 @@
 package app.web;
 
+import app.company.model.Company;
+import app.company.service.CompanyService;
 import app.security.UserAuthDetails;
 import app.user.model.User;
 import app.user.service.UserService;
@@ -15,14 +17,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class IndexController {
 
     private final UserService userService;
+    private final CompanyService companyService;
 
     @Autowired
-    public IndexController(UserService userService) {
+    public IndexController(UserService userService, CompanyService companyService) {
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @GetMapping("/")
@@ -71,10 +77,12 @@ public class IndexController {
     public ModelAndView getHomePage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
+        List<Company> allCompanies = companyService.getAllCompanies();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home");
         modelAndView.addObject("user", user);
+        modelAndView.addObject("allCompanies", allCompanies);
 
         return modelAndView;
     }

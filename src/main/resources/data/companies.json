@@ -1,0 +1,62 @@
+[
+  {
+    "name": "McDonald's",
+    "description": "Made with love & cheese.",
+    "logoUrl": "https://cdn-icons-png.flaticon.com/512/5977/5977588.png"
+  },
+  {
+    "name": "KFC",
+    "description": "It's finger lickin’ good.",
+    "logoUrl": "https://cdn.iconscout.com/icon/free/png-256/free-kfc-logo-icon-226243.png"
+  },
+  {
+    "name": "Subway",
+    "description": "Eat fresh every day.",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Subway_icon.svg"
+  },
+  {
+    "name": "Burger King",
+    "description": "Have it your way!",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/759px-Burger_King_logo_%281999%29.svg.png"
+  },
+  {
+    "name": "Takeaway",
+    "description": "Fast food, faster life.",
+    "logoUrl": "https://static.takeaway.com/images/restaurants/bg/31QP157N/logo_465x320.png"
+  },
+  {
+    "name": "Dragon Wok",
+    "description": "Asian flavors, bold taste.",
+    "logoUrl": "https://images.scalebranding.com/chinese-dragon-icon-logo-65b52e59-71a2-4590-b927-158730842f5a.jpg"
+  },
+  {
+    "name": "Dominos",
+    "description": "Pizza is always the answer!",
+    "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU-kx9XFsDQJxA_OIcASCPNPRKXuF5Zf7Ufg&s"
+  },
+  {
+    "name": "Sushi Co.",
+    "description": "Fresh from the sea.",
+    "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnJ9IDnKwURcdnX2I7VHm15nx_U9kQ0chyxw&s"
+  },
+  {
+    "name": "Taco Loco",
+    "description": "Spice up your life!",
+    "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqLIwz2sDYii6dND8OUHCvFN_IJMDXrYo3-A&s"
+  },
+  {
+    "name": "Aladin Foods",
+    "description": "Taste the magic in every bite.",
+    "logoUrl": "https://www.aladinfoods.bg/assets/css/images/logo.png"
+  },
+  {
+    "name": "Nedelya Patisserie",
+    "description": "Every bite is a celebration.",
+    "logoUrl": "https://cdncloudcart.com/17396/logo/1.svg?1590588424"
+  },
+  {
+    "name": "Happy",
+    "description": "Happiness starts with a bite.",
+    "logoUrl": "https://dostavka.happy.bg/assets/images/logo_top.svg?ver=10298"
+  }
+]

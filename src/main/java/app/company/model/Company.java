@@ -31,6 +31,6 @@ public class Company {
     @Column(nullable = false)
     private String logoUrl;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
     private List<Restaurant> restaurants;
 }

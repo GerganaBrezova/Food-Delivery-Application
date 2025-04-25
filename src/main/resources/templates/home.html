@@ -41,101 +41,14 @@
 
 <main class="brands-container" th:if="${user.role.name() == 'EMPLOYEE' or user.role.name() == 'CUSTOMER'}">
 
-    <div class="brand-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/5977/5977588.png" alt="Brand 1" />
+    <div class="brand-card" th:each="company : ${allCompanies}">
+        <img th:src="${company.logoUrl}" th:alt="${company.name}" />
         <div class="brand-info">
-            <h3>McDonald's</h3>
-            <p>Made with love & cheese.</p>
+            <h3 th:text="${company.name}"></h3>
+            <p th:text="${company.description}"></p>
         </div>
     </div>
 
-    <div class="brand-card">
-        <img src="https://cdn.iconscout.com/icon/free/png-256/free-kfc-logo-icon-226243.png" alt="Brand 2" />
-        <div class="brand-info">
-            <h3>KFC</h3>
-            <p>It's finger lickin’ good.</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Subway_icon.svg" alt="Brand 3" />
-        <div class="brand-info">
-            <h3>Subway</h3>
-            <p>Eat fresh every day.</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/759px-Burger_King_logo_%281999%29.svg.png" alt="Brand 4" />
-        <div class="brand-info">
-            <h3>Burger King</h3>
-            <p>Have it your way!</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://static.takeaway.com/images/restaurants/bg/31QP157N/logo_465x320.png" alt="Brand 5" />
-        <div class="brand-info">
-            <h3>Takeaway</h3>
-            <p>Fast food, faster life.</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://images.scalebranding.com/chinese-dragon-icon-logo-65b52e59-71a2-4590-b927-158730842f5a.jpg" alt="Brand 6" />
-        <div class="brand-info">
-            <h3>Dragon Wok</h3>
-            <p>Asian flavors, bold taste.</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU-kx9XFsDQJxA_OIcASCPNPRKXuF5Zf7Ufg&s" alt="Brand 7" />
-        <div class="brand-info">
-            <h3>Dominos</h3>
-            <p>Pizza is always the answer!</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnJ9IDnKwURcdnX2I7VHm15nx_U9kQ0chyxw&s" alt="Brand 8" />
-        <div class="brand-info">
-            <h3>Sushi Co.</h3>
-            <p>Fresh from the sea.</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqLIwz2sDYii6dND8OUHCvFN_IJMDXrYo3-A&s" alt="Brand 9" />
-        <div class="brand-info">
-            <h3>Taco Loco</h3>
-            <p>Spice up your life!</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://www.aladinfoods.bg/assets/css/images/logo.png " alt="Brand 10" />
-        <div class="brand-info">
-            <h3>Aladin Foods</h3>
-            <p>Taste the magic in every bite.</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://cdncloudcart.com/17396/logo/1.svg?1590588424" alt="Brand 10" />
-        <div class="brand-info">
-            <h3>Nedelya Patisserie</h3>
-            <p>Every bite is a celebration.</p>
-        </div>
-    </div>
-
-    <div class="brand-card">
-        <img src="https://dostavka.happy.bg/assets/images/logo_top.svg?ver=10298" alt="Brand 10" />
-        <div class="brand-info">
-            <h3>Happy</h3>
-            <p>Happiness starts with a bite.</p>
-        </div>
-    </div>
 </main>
 
 <div class="start-day" th:if="${user.role.name() == 'COURIER'}">
