@@ -7,7 +7,6 @@ import app.user.model.User;
 import app.user.model.UserRole;
 import app.user.repository.UserRepository;
 import app.web.dto.RegisterRequest;
-import ch.qos.logback.core.net.server.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -75,6 +74,6 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserById(UUID id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User with id [%s] was not found.".formatted(id)));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFound("User with id [%s] was not found.".formatted(id)));
     }
 }

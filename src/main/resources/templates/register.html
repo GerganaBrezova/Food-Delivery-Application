@@ -30,25 +30,29 @@
             <br>
             <input type="email" id="email" name="email" th:field="*{email}" placeholder="Email">
             <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
-            <br><br>
+            <small th:text="${emailAlreadyExistMessage}"></small>
+            <br>
 
             <label for="username">Username</label>
             <br>
             <input type="text" id="username" name="username" th:field="*{username}" placeholder="Username">
             <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
-            <br><br>
+            <small th:text="${usernameAlreadyExistMessage}"></small>
+            <br>
 
             <label for="password">Password</label>
             <br>
             <input type="password" id="password" name="password" th:field="*{password}" placeholder="Password">
             <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
-            <br><br>
+            <small th:text="${passwordsDoNotMatchMessage}"></small>
+            <br>
 
             <label for="confirmPassword">Confirm Password</label>
             <br>
             <input type="password" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm Password">
             <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
-            <br><br>
+            <small th:text="${passwordsDoNotMatchMessage}"></small>
+            <br>
 
             <button type="submit" class="login-btn">Sign Up</button>
             <br>
