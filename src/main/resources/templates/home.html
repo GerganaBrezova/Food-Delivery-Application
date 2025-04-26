@@ -43,7 +43,10 @@
 
 <a class="brand-link" th:each="company : ${allCompanies}">
     <div class="brand-card">
-        <button class="delete-button">×</button>
+        <form>
+            <button type="submit" class="delete-button">×</button>
+        </form>
+
         <img th:src="${company.logoUrl}" th:alt="${company.name}"  />
         <div class="brand-info">
             <h3 th:text="${company.name}"></h3>
