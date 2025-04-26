@@ -41,8 +41,9 @@
 
 <main class="brands-container" th:if="${user.role.name() == 'EMPLOYEE' or user.role.name() == 'CUSTOMER'}">
 
-<a class="brand-link" th:each="company : ${allCompanies}" onclick="categories.html">
+<a class="brand-link" th:each="company : ${allCompanies}">
     <div class="brand-card">
+        <button class="delete-button">×</button>
         <img th:src="${company.logoUrl}" th:alt="${company.name}"  />
         <div class="brand-info">
             <h3 th:text="${company.name}"></h3>
