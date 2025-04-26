@@ -11,7 +11,7 @@
 <div class="login-container">
     <div class="login-left">
 
-        <h3>Sign up for fast, fresh food delivery:</h3>
+        <h1>Sign up for fast, <br>fresh food delivery:</h1>
         <form th:action="@{/register}" th:method="POST" th:object="${registerRequest}">
             <br>
             <label for="firstName">First Name</label>
@@ -50,13 +50,12 @@
             <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
             <br><br>
 
-            <button type="submit" class="login-btn" onclick="home.html">Sign Up</button>
+            <button type="submit" class="login-btn">Sign Up</button>
             <br>
             <br>
             <p class="have-account">
                 Already have an account?
                 <a th:href="@{/login}">Log In</a>
-
             </p>
 
 

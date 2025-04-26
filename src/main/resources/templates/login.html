@@ -17,12 +17,12 @@
                 <br>
                 <label for="username">Username</label>
                 <br>
-                <input type="text" id="username" name="username" required placeholder="Username" th:field="*{username}">
+                <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}">
                 <br><br>
 
                 <label for="password">Password</label>
                 <br>
-                <input type="password" id="password" name="password" required placeholder="Password" th:field="*{password}">
+                <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}">
                 <small th:if="${errorMessage}" th:text="${errorMessage}"></small>
                 <br><br>
 
