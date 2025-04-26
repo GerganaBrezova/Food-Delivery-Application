@@ -50,9 +50,14 @@
             <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
             <br><br>
 
-            <button type="submit" class="login-btn">Sign Up</button>
+            <button type="submit" class="login-btn" onclick="home.html">Sign Up</button>
             <br>
             <br>
+            <p class="have-account">
+                Already have an account?
+                <a href="register.html">Log In</a>
+
+            </p>
 
 
         </form>

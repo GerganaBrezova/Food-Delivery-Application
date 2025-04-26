@@ -119,3 +119,17 @@ small {
     margin-top: 5px;
     font-size: 0.85em;
 }
+
+.have-account {
+    text-align: center;
+    color: white;
+}
+
+.have-account a
+{
+    color: white;
+}
+
+.have-account a:hover {
+    color: #FFB6B6;
+  }

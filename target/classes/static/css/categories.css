@@ -165,17 +165,17 @@
 
 
   .appetizers {
-    background-image: url('../images/home.jpg');
+    background-image: url('../images/appetizer.jpg');
   }
 
   .main {
-    background-image: url('../images/home.jpg');
+    background-image: url('../images/main.jpg');
   }
 
   .desserts {
-    background-image: url('../images/home.jpg');
+    background-image: url('../images/dessert.jpg');
   }
 
   .drinks {
-    background-image: url('../images/home.jpg');
+    background-image: url('../images/drinks.jpg');
   }

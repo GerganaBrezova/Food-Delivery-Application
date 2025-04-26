@@ -88,6 +88,10 @@ form input {
     background: #521615;
   }
 
+    .login-btn:hover {
+      background: #772e2e;
+    }
+
 
 .login-right
 {
