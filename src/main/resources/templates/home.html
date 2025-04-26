@@ -41,9 +41,11 @@
 
 <main class="brands-container" th:if="${user.role.name() == 'EMPLOYEE' or user.role.name() == 'CUSTOMER'}">
 
-<a class="brand-link" th:each="company : ${allCompanies}">
-    <div class="brand-card" th:attr="data-brand-id=${company.id}" onclick="openLocationPopup()">
-        <form>
+<a class="brand-link" th:each="company : ${allCompanies}" th:attr="data-brand-id=${company.id}">
+
+    <div class="brand-card">
+
+        <form th:if="${user.role.name() == 'EMPLOYEE'}">
             <button type="submit" class="delete-button">×</button>
         </form>
 
@@ -72,11 +74,9 @@
 <div id="location-popup" class="popup-overlay">
     <div class="popup-content">
         <button id="close-popup" class="close-btn">×</button>
-        <h2>Please choose your location in Bulgaria</h2>
+        <h2>Please select the restaurant's location.</h2>
         <br>
         <select id="location">
-            <option value="">-- Select a city --</option>
-            <br>
             <option value="Sofia">Sofia</option>
             <option value="Plovdiv">Plovdiv</option>
         </select>
@@ -86,29 +86,30 @@
 </div>
 
 <script>
+    let selectedBrandId = null;
 
-    document.querySelectorAll('.brand-card').forEach(card => {
-      card.addEventListener('click', () => {
-        document.getElementById('location-popup').style.display = 'flex';
-      });
+    document.querySelectorAll('.brand-card').forEach((card, index) => {
+        card.addEventListener('click', () => {
+            selectedBrandId = document.querySelectorAll('.brand-link')[index].getAttribute('data-brand-id');
+            document.getElementById('location-popup').style.display = 'flex';
+        });
     });
-
 
     document.getElementById('close-popup').addEventListener('click', () => {
-      document.getElementById('location-popup').style.display = 'none';
+        document.getElementById('location-popup').style.display = 'none';
     });
-
 
     document.getElementById('submit-location').addEventListener('click', () => {
-      const location = document.getElementById('location').value;
-      if (location) {
-        alert('You chose: ' + location);
-        document.getElementById('location-popup').style.display = 'none';
-      } else {
-        alert('Please select a location.');
-      }
+        const location = document.getElementById('location').value;
+        if (location && selectedBrandId) {
+            window.location.href = `/restaurant/categories/${selectedBrandId}/location/${location}`;
+        } else {
+            alert('Please select a location.');
+        }
     });
 </script>
+
+
 
 </body>
 

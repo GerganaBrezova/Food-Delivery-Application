@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="server-error.css" />
+    <link rel="stylesheet" href="/css/server-error.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 
@@ -17,10 +17,10 @@
         <h2>Error 503</h2>
         <h1>Server Error</h1>
         <p>All of our servers are busy now.</p>
-        <a href="homepage.html" class="btn-home">Go Back to Home</a>
+        <a th:href="@{/home}" class="btn-home">Go Back to Home</a>
     </div>
     <div class="image-section">
-        <img src="server-error.jpg" alt="Category Image">
+        <img src="/images/server-error.jpg" alt="Category Image">
     </div>
 </main>
 
