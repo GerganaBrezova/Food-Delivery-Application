@@ -1,4 +1,4 @@
-package app.web.dto;
+package app.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingRequestValueException;
