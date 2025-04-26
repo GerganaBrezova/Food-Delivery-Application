@@ -2,10 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-body
-{
+body {
     font-family: Inika, sans-serif;
     background: linear-gradient(to right,
     #CF7777 50%,
@@ -18,8 +17,7 @@ body
     padding: 20px;
 }
 
-.login-container
-{
+.login-container {
     display: flex;
     width: 100%;
     max-width: 800px;
@@ -33,20 +31,19 @@ body
 }
 
 @media (min-width: 768px) {
-  .login-container {
-    flex-direction: row;
-    height: auto;
-  }
+    .login-container {
+        flex-direction: row;
+        height: auto;
+    }
 }
 
 .login-left,
 .login-right {
-  flex: 1;
-  min-height: 300px;
+    flex: 1;
+    min-height: 300px;
 }
 
-.login-left
-{
+.login-left {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -55,57 +52,47 @@ body
     padding: 30px;
     overflow-y: auto;
     max-height: 100vh;
-
 }
 
 
-.login-left h3{
-  padding-bottom: 20px;
-  text-align: center;
-    }
-
-form {
-  width: 100%;
-  max-width: 400px;
-  margin-top: 20px;
+.login-left h1 {
+    padding-bottom: 20px;
+    text-align: center;
 }
 
 form input {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     margin-top: 10px;
     border: none;
     border-radius: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    font-size: 16px;
-  }
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+}
 
-   .login-btn{
+.login-btn {
     display: inline-block;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 100%;
     padding: 15px;
     border: 1px solid white;
     border-radius: 20px;
-    background: #CF7777;
     color: white;
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
     background: #521615;
-  }
+}
 
 
-  .login-btn:hover {
+.login-btn:hover {
     background: #772e2e;
-  }
+}
 
-
-.login-right
-{
+.login-right {
     background-image: url(../images/register.jpg);
     background-size: cover;
     background-position: center;
@@ -125,11 +112,10 @@ small {
     color: white;
 }
 
-.have-account a
-{
+.have-account a {
     color: white;
 }
 
 .have-account a:hover {
     color: #FFB6B6;
-  }
+}
