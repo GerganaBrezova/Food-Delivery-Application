@@ -42,7 +42,7 @@
 <main class="brands-container" th:if="${user.role.name() == 'EMPLOYEE' or user.role.name() == 'CUSTOMER'}">
 
 <a class="brand-link" th:each="company : ${allCompanies}">
-    <div class="brand-card">
+    <div class="brand-card" th:attr="data-brand-id=${company.id}" onclick="openLocationPopup()">
         <form>
             <button type="submit" class="delete-button">×</button>
         </form>
@@ -69,6 +69,46 @@
 </div>
 
 
+<div id="location-popup" class="popup-overlay">
+    <div class="popup-content">
+        <button id="close-popup" class="close-btn">×</button>
+        <h2>Please choose your location in Bulgaria</h2>
+        <br>
+        <select id="location">
+            <option value="">-- Select a city --</option>
+            <br>
+            <option value="Sofia">Sofia</option>
+            <option value="Plovdiv">Plovdiv</option>
+        </select>
+
+        <button id="submit-location" onclick="categories.html">Continue</button>
+    </div>
+</div>
+
+<script>
+
+    document.querySelectorAll('.brand-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.getElementById('location-popup').style.display = 'flex';
+      });
+    });
+
+
+    document.getElementById('close-popup').addEventListener('click', () => {
+      document.getElementById('location-popup').style.display = 'none';
+    });
+
+
+    document.getElementById('submit-location').addEventListener('click', () => {
+      const location = document.getElementById('location').value;
+      if (location) {
+        alert('You chose: ' + location);
+        document.getElementById('location-popup').style.display = 'none';
+      } else {
+        alert('Please select a location.');
+      }
+    });
+</script>
 
 </body>
 
