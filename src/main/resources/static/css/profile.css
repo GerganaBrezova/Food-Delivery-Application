@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .welcome-title {
+    font-size: 2em;
+    color: #eae8e8;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.welcome-text {
+    font-size: 1em;
+    color: #eae8e8;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+  .main-header {
+    width: 100%;
+    display: flex;
+    background: #531c1c;
+    padding: 0px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .header-left{
+    margin: 0;
+    padding: 0;
+
+  }
+
+  .header-left img {
+    width: 450px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+
+  }
+
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+
+  .header-nav {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: left;
+
+  }
+
+  .nav-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-button:hover {
+    background-color: #ddd;
+  }
+
+  .top-controls {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+
+
+  .profile-page {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 0px 30px 30px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+
+  input[disabled] {
+    background-color: #e0e0e0;
+  }
+
+
+  .profile-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .profile-info .field {
+    flex: 1 1 48%;
+  }
+
+  .faq-section {
+    margin-top: 30px;
+  }
+
+  .faq {
+    margin-bottom: 15px;
+  }
+
+  .faq-question {
+    width: 100%;
+    padding: 10px;
+    background-color: #531c1c;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-question:hover {
+    background-color: #7a2e2e;
+  }
+
+  .faq-answer {
+    display: none;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-top: 5px;
+  }
+
+  .faq-question::after {
+    content: '▼'; /* Стрелка */
+    font-size: 1.2em;
+  }
+
+  .faq-question.active::after {
+    content: '^';
+  }
+
+  .logout-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .logout-button {
+    padding: 10px 20px;
+    background-color: #531c1c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .logout-button:hover {
+    background-color: #7a2e2e;
+  }
+
+  .edit-button {
+    display: block;
+    padding: 10px;
+    background-color: #531c1c;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 20px;
+
+  }
+
+  .edit-button:hover {
+    background-color: #7a2e2e;
+  }
+
+
+  #editProfileBtnWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  #editProfileBtnWrapper .profile-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  #editProfileBtn {
+    padding: 10px 20px;
+    width: auto;
+    font-size: 1em;
+    margin-left: 20px;
+    cursor: pointer;
+  }
