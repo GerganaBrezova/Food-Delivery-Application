@@ -3,6 +3,7 @@ package app.company.service;
 import app.company.model.Company;
 import app.product.model.Product;
 import app.product.model.ProductCategory;
+import app.product.service.ProductService;
 import app.restaurant.model.Restaurant;
 import app.web.dto.CompanySeed;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,8 +15,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -25,11 +24,13 @@ public class CompanySeeder implements CommandLineRunner {
 
     private final CompanyService companyService;
     private final ObjectMapper objectMapper;
+    private final ProductService productService;
 
     @Autowired
-    public CompanySeeder(CompanyService companyService, ObjectMapper objectMapper) {
+    public CompanySeeder(CompanyService companyService, ObjectMapper objectMapper, ProductService productService) {
         this.companyService = companyService;
         this.objectMapper = objectMapper;
+        this.productService = productService;
     }
 
     @Override
@@ -49,7 +50,7 @@ public class CompanySeeder implements CommandLineRunner {
                     .logoUrl(dto.getLogoUrl())
                     .build();
 
-            List<Product> products = companyService.generateUniqueProductsForBrand(dto.getName());
+            List<Product> products = productService.generateUniqueProductsForBrand(dto.getName());
 
             Restaurant sofia = Restaurant.builder()
                     .name(dto.getName() + " Sofia")

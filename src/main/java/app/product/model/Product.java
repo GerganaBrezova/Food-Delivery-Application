@@ -35,6 +35,9 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(nullable = false)
+    private String imageUrl;
+
     @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<>();
 
