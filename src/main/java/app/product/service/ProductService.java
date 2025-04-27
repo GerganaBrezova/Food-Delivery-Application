@@ -42,7 +42,7 @@ public class ProductService {
 
                 createProduct(brandName + " Cola", ProductCategory.DRINK, "1.90", "/images/cola.jpg"),
                 createProduct(brandName + " Orange Juice", ProductCategory.DRINK, "2.10", "/images/orange-juice.jpg"),
-                createProduct(brandName + "Milkshake", ProductCategory.DRINK, "2.90", "/images/milk-shake.jpg")
+                createProduct(brandName + " Milk Shake", ProductCategory.DRINK, "2.90", "/images/milk-shake.jpg")
         ));
     }
 
