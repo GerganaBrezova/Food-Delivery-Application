@@ -2,6 +2,7 @@ package app.product.model;
 
 import app.order.model.Order;
 import app.restaurant.model.Restaurant;
+import app.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -16,6 +16,15 @@ import java.nio.file.AccessDeniedException;
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
 
+//    @ExceptionHandler(OrderNotFound.class)
+//    public String handleOrderNotFound(RedirectAttributes redirectAttributes, OrderNotFound orderNotFound) {
+//
+//        String message = orderNotFound.getMessage();
+//        redirectAttributes.addFlashAttribute("orderNotFoundMessage", message);
+//
+//        return "redirect:/orders/basket";
+//    }
+
     @ExceptionHandler(UsernameAlreadyExists.class)
     public String handleUsernameAlreadyExists(RedirectAttributes redirectAttributes, UsernameAlreadyExists usernameException) {
 

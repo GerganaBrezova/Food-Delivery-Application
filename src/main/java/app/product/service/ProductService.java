@@ -2,9 +2,11 @@ package app.product.service;
 
 import app.company.model.Company;
 import app.company.service.CompanyService;
+import app.exceptions.ProductNotFound;
 import app.exceptions.RestaurantNotFound;
 import app.product.model.Product;
 import app.product.model.ProductCategory;
+import app.product.repository.ProductRepository;
 import app.restaurant.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +21,12 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     private final CompanyService companyService;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductService(CompanyService companyService) {
+    public ProductService(CompanyService companyService, ProductRepository productRepository) {
         this.companyService = companyService;
+        this.productRepository = productRepository;
     }
 
     public List<Product> generateUniqueProductsForBrand(String brandName) {
@@ -65,6 +69,10 @@ public class ProductService {
         return restaurant.getProducts().stream()
                 .filter(p -> p.getCategory().name().equals(categoryName))
                 .collect(Collectors.toList());
+    }
+
+    public Product getProductById(UUID productId) {
+        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFound("Product with id [%s] not found.".formatted(productId)));
     }
 }
 

@@ -25,7 +25,7 @@
         <br>
         <nav class="header-nav">
             <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-            <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
             <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
                 <i class="fas fa-chart-bar"></i>
                 Statistics

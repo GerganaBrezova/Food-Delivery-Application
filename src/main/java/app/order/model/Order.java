@@ -3,6 +3,7 @@ package app.order.model;
 import app.product.model.Product;
 import app.user.model.Courier;
 import app.user.model.Customer;
+import app.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,7 +40,7 @@ public class Order {
     private BigDecimal totalPrice;
 
     @ManyToOne
-    private Customer customer;
+    private User customer;
 
     @ManyToOne
     private Courier courier;

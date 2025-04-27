@@ -12,7 +12,7 @@
 <body>
 <header class="main-header">
     <div class="header-left">
-        <img src="images/home.jpg" alt="Logo"/>
+        <img src="/images/home.jpg" alt="Logo"/>
     </div>
     <div class="header-content">
         <h1 class="welcome-title">Welcome to Our Page!</h1>
@@ -25,7 +25,7 @@
         <br>
         <nav class="header-nav">
             <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-            <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
             <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
                 <i class="fas fa-chart-bar"></i>
                 Statistics
@@ -56,9 +56,10 @@
                 <span class="product-price"
                       th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></span>
 
-                <form action="" method="">
+                <form th:action="@{'/orders/basket/add-product/' + ${product.id}}" th:method="POST">
                     <button type="submit" class="add-button">Add To Cart</button>
                 </form>
+
             </div>
         </div>
     </div>
