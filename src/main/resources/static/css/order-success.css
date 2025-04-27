@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .welcome-title {
+    font-size: 2em;
+    color: #eae8e8;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.welcome-text {
+    font-size: 1em;
+    color: #eae8e8;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+  .main-header {
+    width: 100%;
+    display: flex;
+    background: #531c1c;
+    padding: 0px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .header-left{
+    margin: 0;
+    padding: 0;
+
+  }
+
+  .header-left img {
+    width: 450px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+
+  }
+
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+
+  .header-nav {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: left;
+
+  }
+
+  .nav-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-button:hover {
+    background-color: #ddd;
+  }
+
+  .top-controls {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+
+
+  .order-success-page {
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 300px;
+  }
+
+  .success-container {
+    text-align: center;
+  }
+
+  .success-icon {
+    width: 100px;
+    height: 100px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+  }
+
+  .success-container h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .success-container p {
+    font-size: 18px;
+    color: #555;
+  }
+
+
+  .track-order-btn {
+    margin-top: auto;
+    padding: 12px 30px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 18px;
+    transition: background 0.3s;
+    margin-top: 20px;
+  }
+
+  .track-order-btn:hover {
+    background-color: #45a049;
+  }
