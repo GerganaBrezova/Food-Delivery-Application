@@ -1,17 +1,24 @@
 package app.order.service;
 
+import app.exceptions.OrderHasNoProducts;
 import app.exceptions.OrderNotFound;
 import app.order.model.Order;
 import app.order.model.OrderStatus;
 import app.order.repository.OrderRepository;
 import app.product.model.Product;
 import app.user.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Slf4j
 
 @Service
 public class OrderService {
@@ -67,4 +74,27 @@ public class OrderService {
                 .orElseThrow(() -> new OrderNotFound("No active order for user."));
     }
 
+    public void updateOrderDetails(Order order, String address) {
+
+        order.setStatus(OrderStatus.CREATED);
+        order.setAddress(address);
+
+        orderRepository.save(order);
+
+        log.info("Order [%s] placed successfully.".formatted(order.getId()));
+    }
+
+    public List<Order> getAllUserOrders(User user) {
+        return orderRepository.findAll().stream()
+                .filter(order -> order.getCustomer().getId().equals(user.getId()))
+                .filter(order -> order.getStatus() != OrderStatus.PENDING)
+                .sorted(Comparator.comparing(Order::getCreatedOn).reversed())
+                .collect(Collectors.toList());
+    }
+
+    public void validateOrderHasProducts(Order order) {
+        if (order.getProducts() == null || order.getProducts().isEmpty()) {
+            throw new OrderHasNoProducts("Cannot place an order with no products.");
+        }
+    }
 }

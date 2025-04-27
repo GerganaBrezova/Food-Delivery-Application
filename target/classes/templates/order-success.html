@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="order-success.css" />
+  <link rel="stylesheet" href="/css/order-success.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 
@@ -12,7 +12,7 @@
 <body>
 <header class="main-header">
   <div class="header-left">
-    <img src="home.jpg" alt="Logo" />
+    <img src="/images/home.jpg" alt="Logo" />
   </div>
   <div class="header-content">
     <h1 class="welcome-title">Welcome to Our Page!</h1>
@@ -23,10 +23,13 @@
     <br>
     <br>
     <nav class="header-nav">
-      <a href="#" class="nav-button"><i class="fas fa-home"></i> Home</a>
-      <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
-      <a href="#" class="nav-button"><i class="fas fa-chart-bar"></i> Statistics</a>
-      <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+      <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
+      <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+      <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
+        <i class="fas fa-chart-bar"></i>
+        Statistics
+      </a>
+      <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
       <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
     </nav>
   </div>
@@ -42,7 +45,7 @@
     <p>Your order has been placed successfully. Thank you for choosing us!</p>
   </div>
 
-  <a href="orders.html" class="track-order-btn">Track Your Order</a>
+  <a th:href="@{/orders}" class="track-order-btn">Track Your Order</a>
 
 </main>
 

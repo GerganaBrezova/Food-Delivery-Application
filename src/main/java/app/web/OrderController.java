@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -28,6 +29,20 @@ public class OrderController {
         this.userService = userService;
         this.orderService = orderService;
         this.productService = productService;
+    }
+
+    @GetMapping
+    public ModelAndView getOrdersPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+        List<Order> userOrders = orderService.getAllUserOrders(user);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("orders");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("userOrders", userOrders);
+
+        return modelAndView;
     }
 
     @GetMapping("/basket")
@@ -51,7 +66,7 @@ public class OrderController {
 
         Product product = productService.getProductById(productId);
 
-        Order order = orderService.getCurrentOrder(user);
+        Order order = orderService.getOrCreateOrder(user);
 
         orderService.addProductToOrder(order, product);
 
@@ -72,5 +87,29 @@ public class OrderController {
 
         return "redirect:/orders/basket";
 
+    }
+
+    @GetMapping("/success")
+    public ModelAndView getSuccessPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("order-success");
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
+
+    @PostMapping("/basket/place-order/{orderId}")
+    public String placeOrder(@AuthenticationPrincipal UserAuthDetails userAuthDetails, @PathVariable UUID orderId, @RequestParam String address) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+        Order order = orderService.getCurrentOrder(user);
+
+        orderService.validateOrderHasProducts(order);
+        orderService.updateOrderDetails(order, address);
+
+        return "redirect:/orders/success";
     }
 }

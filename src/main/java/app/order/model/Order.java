@@ -39,6 +39,8 @@ public class Order {
     @Column(nullable = false)
     private BigDecimal totalPrice;
 
+    private String address;
+
     @ManyToOne
     private User customer;
 
