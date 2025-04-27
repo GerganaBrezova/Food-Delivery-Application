@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="orders.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+
+    <title>Orders</title>
+</head>
+<body>
+<header class="main-header">
+    <div class="header-left">
+        <img src="home.jpg" alt="Logo" />
+    </div>
+    <div class="header-content">
+        <h1 class="welcome-title">Welcome to Our Page!</h1>
+        <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <nav class="header-nav">
+            <a href="#" class="nav-button"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a href="#" class="nav-button"><i class="fas fa-chart-bar"></i> Statistics</a>
+            <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+            <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+        </nav>
+    </div>
+
+</header>
+
+<main class="orders-page">
+    <h1>Order Tracking & History</h1>
+
+    <br>
+    <section class="order-tracking">
+        <h2>Track Your Order</h2>
+        <br>
+        <div class="tracking-container">
+            <div class="tracking-steps">
+                <div class="step completed">
+                    <div class="circle"></div>
+                    <p>Order Sent</p>
+                </div>
+                <div class="line completed"></div>
+                <div class="step">
+                    <div class="circle"></div>
+                    <p>Courier Found</p>
+                </div>
+                <div class="line"></div>
+                <div class="step">
+                    <div class="circle"></div>
+                    <p>Picked Up from Restaurant</p>
+                </div>
+                <div class="line"></div>
+                <div class="step">
+                    <div class="circle"></div>
+                    <p>Delivered</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <section class="order-history">
+        <h2>Order History</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Products</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>#12345</td>
+                <td>2025-04-01</td>
+                <td>$45.99</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>#12346</td>
+                <td>2025-04-02</td>
+                <td>$30.50</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>#12347</td>
+                <td>2025-04-03</td>
+                <td>$60.00</td>
+                <td>4</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+    <h1>Delivery Info</h1>
+
+    <div class="delivery-info">
+        <div class="stats">
+            <div class="stat">
+                <h3>124</h3>
+                <p>Orders Completed</p>
+            </div>
+            <div class="stat">
+                <h3>$150</h3>
+                <p>Bonus</p>
+            </div>
+        </div>
+
+        <br>
+        <div class="order-history">
+            <h2>Order History</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Number of Products</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>#12345</td>
+                    <td>2025-04-26</td>
+                    <td>$25</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>#12346</td>
+                    <td>2025-04-25</td>
+                    <td>$45</td>
+                    <td>5</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+</body>
