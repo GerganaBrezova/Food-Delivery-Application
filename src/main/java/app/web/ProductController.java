@@ -43,10 +43,6 @@ public class ProductController {
         modelAndView.addObject("user", user);
         modelAndView.addObject("categoryProducts", categoryProducts);
 
-        modelAndView.addObject("brandId", brandId);
-        modelAndView.addObject("location", location);
-        modelAndView.addObject("categoryName", categoryName);
-
         return modelAndView;
     }
 }
