@@ -206,4 +206,11 @@
   .add-button:hover {
     background-color: #7b2929;
   }
+
+  p {
+    color: red;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+  }
   

@@ -1,9 +1,6 @@
 package app.web;
 
-import app.exceptions.EmailAlreadyExists;
-import app.exceptions.PasswordsDoNotMatch;
-import app.exceptions.UserNotFound;
-import app.exceptions.UsernameAlreadyExists;
+import app.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.nio.file.AccessDeniedException;
-import java.util.Collections;
 
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
@@ -47,16 +43,22 @@ public class ExceptionHandlerAdvice {
         return "redirect:/register";
     }
 
-    @ExceptionHandler(UserNotFound.class)
-    public ModelAndView handleUserNotFoundException(UserNotFound userNotFoundException) {
+//    @ExceptionHandler(UserNotFound.class)
+//    public ModelAndView handleUserNotFoundException(UserNotFound userNotFoundException) {
+//
+//        ModelAndView modelAndView = new ModelAndView("users");
+//
+//        return modelAndView;
+//    }
 
-        ModelAndView modelAndView = new ModelAndView("users");
-        modelAndView.addObject("searchPerformed", true);
-        modelAndView.addObject("userNotFoundMessage", userNotFoundException.getMessage());
-        modelAndView.addObject("users", Collections.emptyList());
-
-        return modelAndView;
-    }
+//    @ExceptionHandler(ProductsNotFound.class)
+//    public String handleProductsNotFoundException(RedirectAttributes redirectAttributes, ProductsNotFound productsNotFoundException) {
+//
+//        String message = "There are no products available.";
+//        redirectAttributes.addFlashAttribute("productsNotFoundMessage", message);
+//
+//        return "redirect:/products";
+//    }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({

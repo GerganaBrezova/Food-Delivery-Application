@@ -39,7 +39,12 @@
 
 <main class="brands-container">
 
-    <div class="brand-card" th:style="'background-image: url(' + ${product.imageUrl} + ')'" th:each="product : ${categoryProducts}">
+    <div th:if="${categoryProducts == null || categoryProducts.isEmpty()}">
+        <p class="no-products-message">There are no products available.</p>
+    </div>
+
+    <div th:if="${categoryProducts != null && !categoryProducts.isEmpty()}" th:each="product : ${categoryProducts}"
+         class="brand-card" th:style="'background-image: url(' + ${product.imageUrl} + ')'">
 
         <form action="" th:if="${user.role.name() == 'EMPLOYEE'}">
             <button type="button" class="delete-button">×</button>
@@ -54,7 +59,6 @@
                 <form action="" method="">
                     <button type="submit" class="add-button">Add To Cart</button>
                 </form>
-
             </div>
         </div>
     </div>
