@@ -40,7 +40,7 @@
     <div id="editProfileBtnWrapper">
         <span class="profile-title">Profile</span>
 
-        <form action="/edit-profile" method="POST">
+        <form action="" th:method="PUT">
             <button id="editProfileBtn" class="edit-button">Save Changes</button>
         </form>
 
@@ -50,23 +50,34 @@
     <div class="profile-info">
         <div class="field">
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" value="John" disabled>
-        </div>
-
-        <div class="field">
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" value="Doe" disabled>
-        </div>
-
-        <div class="field">
-            <label for="email">Email:</label>
-            <input type="email" id="email" value="john.doe@example.com" disabled>
+            <input type="text" id="firstName" placeholder="First name...">
         </div>
 
         <div class="field">
             <label for="password">Password:</label>
-            <input type="password" id="password" value="******" disabled>
+            <input type="password" id="password" placeholder="Password...">
         </div>
+
+        <div class="field">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" placeholder="Last name...">
+        </div>
+
+        <div class="field">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm password...">
+        </div>
+
+        <div class="field">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Username...">
+        </div>
+
+        <div class="field">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Email...">
+        </div>
+
     </div>
 
     <div class="faq-section">

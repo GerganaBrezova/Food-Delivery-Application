@@ -3,6 +3,7 @@ package app.web;
 import app.security.UserAuthDetails;
 import app.user.model.User;
 import app.user.service.UserService;
+import app.web.dto.EditProfileRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("profile");
         modelAndView.addObject("user", user);
+        modelAndView.addObject("editProfileRequest", new EditProfileRequest());
 
         return modelAndView;
     }
