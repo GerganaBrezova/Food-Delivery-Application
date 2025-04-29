@@ -104,6 +104,8 @@ public class OrderController {
     @PostMapping("/basket/place-order/{orderId}")
     public String placeOrder(@AuthenticationPrincipal UserAuthDetails userAuthDetails, @PathVariable UUID orderId, @RequestParam String address) {
 
+        orderService.validateAddressProvided(address);
+
         User user = userService.getUserById(userAuthDetails.getId());
         Order order = orderService.getCurrentOrder(user);
 

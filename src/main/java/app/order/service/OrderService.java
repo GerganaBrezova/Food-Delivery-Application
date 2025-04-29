@@ -1,5 +1,6 @@
 package app.order.service;
 
+import app.exceptions.NoAddressSelected;
 import app.exceptions.OrderHasNoProducts;
 import app.exceptions.OrderNotFound;
 import app.order.model.Order;
@@ -95,6 +96,12 @@ public class OrderService {
     public void validateOrderHasProducts(Order order) {
         if (order.getProducts() == null || order.getProducts().isEmpty()) {
             throw new OrderHasNoProducts("Cannot place an order with no products.");
+        }
+    }
+
+    public void validateAddressProvided(String address) {
+        if (address == null || address.trim().isEmpty()) {
+            throw new NoAddressSelected("Please enter an address!");
         }
     }
 }

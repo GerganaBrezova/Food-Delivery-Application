@@ -16,6 +16,15 @@ import java.nio.file.AccessDeniedException;
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
 
+    @ExceptionHandler(NoAddressSelected.class)
+    public String handleNoAddressSelected(RedirectAttributes redirectAttributes, NoAddressSelected noAddressSelected) {
+
+        String message = noAddressSelected.getMessage();
+        redirectAttributes.addFlashAttribute("noAddressSelectedMessage", message);
+
+        return "redirect:/orders/basket";
+    }
+
     @ExceptionHandler(OrderHasNoProducts.class)
     public String handleOrderHasNoProducts(RedirectAttributes redirectAttributes, OrderHasNoProducts orderHasNoProducts) {
 

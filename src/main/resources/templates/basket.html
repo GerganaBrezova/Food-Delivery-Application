@@ -75,11 +75,12 @@
 
     <form th:action="@{'/orders/basket/place-order/' + ${order.id}}" method="post" class="checkout-form">
         <label for="address">Delivery Address:</label>
-        <input type="text" id="address" name="address" placeholder="Enter your address" required>
+        <input type="text" id="address" name="address" placeholder="Enter your address">
         <button type="submit" class="order-btn">Place Order</button>
     </form>
 
-    <p class="no-products" th:text="${orderHasNoProductsMessage}"></p>
+    <p class="error-handling" th:text="${noAddressSelectedMessage}"></p>
+    <p class="error-handling" th:text="${orderHasNoProductsMessage}"></p>
 
 </main>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/orders.css" />
+    <link rel="stylesheet" href="/css/orders.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 
@@ -12,11 +12,12 @@
 <body>
 <header class="main-header">
     <div class="header-left">
-        <img src="/images/home.jpg" alt="Logo" />
+        <img src="/images/home.jpg" alt="Logo"/>
     </div>
     <div class="header-content">
         <h1 class="welcome-title">Welcome to Our Page!</h1>
-        <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
+        <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?)
+            and let’s get things rolling.</h2>
         <br>
         <br>
         <br>
@@ -39,12 +40,19 @@
 <main class="orders-page">
 
     <br>
-    <section class="order-tracking" th:if="${user.role.name() == 'CUSTOMER'}">
-        <h1>Order Tracking & History</h1>
+    <h1>Order Tracking & History</h1>
 
-        <h2>Track Your Order</h2>
+    <p class="no-orders" th:if="${user.role.name() == 'CUSTOMER' and #lists.isEmpty(userOrders)}">You still do not have any orders!</p>
+
+    <section class="order-tracking"
+             th:if="${user.role.name() == 'CUSTOMER' and not #lists.isEmpty(userOrders)}">
+
+        <h2>Track Your Orders</h2>
         <br>
         <div class="tracking-container" th:each="order : ${userOrders}">
+
+            <p class="order-id" th:text="${'ID: ' + #strings.substring(order.id, 0, 3)} + '..'"></p>
+
             <div class="tracking-steps">
 
                 <div class="step completed">
@@ -52,21 +60,21 @@
                     <p>Order Sent</p>
                 </div>
 
-                <div th:classappend="${order.status.name() == 'CREATED' ? 'line' : 'line completed'}"></div>
+                <div class="line"></div>
 
                 <div th:classappend="${order.status.name() == 'COURIER_FOUND' or order.status.name() == 'PICKED_UP' or order.status.name() == 'DELIVERED' ? 'step completed' : 'step'}">
                     <div class="circle"></div>
                     <p>Courier Found</p>
                 </div>
 
-                <div th:classappend="${order.status.name() == 'PICKED_UP' or order.status.name() == 'DELIVERED' ? 'line completed' : 'line'}"></div>
+                <div class="line"></div>
 
                 <div th:classappend="${order.status.name() == 'PICKED_UP' or order.status.name() == 'DELIVERED' ? 'step completed' : 'step'}">
                     <div class="circle"></div>
-                    <p>Picked Up from Restaurant</p>
+                    <p>Picked Up</p>
                 </div>
 
-                <div th:classappend="${order.status.name() == 'DELIVERED' ? 'line completed' : 'line'}"></div>
+                <div class="line"></div>
 
                 <div th:classappend="${order.status.name() == 'DELIVERED' ? 'step completed' : 'step'}">
                     <div class="circle"></div>
@@ -80,8 +88,8 @@
 
     <br>
     <br>
-    <section class="order-history">
-        <h2>Order History</h2>
+    <section class="order-history" th:if="${user.role.name() == 'CUSTOMER' and not #lists.isEmpty(userOrders)}">
+        <h2>Orders History</h2>
         <table>
             <thead>
             <tr>
