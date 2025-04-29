@@ -6,7 +6,9 @@ import app.user.model.Customer;
 import app.user.model.User;
 import app.user.model.UserRole;
 import app.user.repository.UserRepository;
+import app.web.dto.EditProfileRequest;
 import app.web.dto.RegisterRequest;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -78,5 +80,27 @@ public class UserService implements UserDetailsService {
 
     public User getUserById(UUID id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFound("User with id [%s] was not found.".formatted(id)));
+    }
+
+    public void editUserDetails(EditProfileRequest editProfileRequest, UUID id) {
+
+        User user = getUserById(id);
+
+        if (!user.getUsername().equals(editProfileRequest.getUsername()) &&
+                userRepository.existsByUsername(editProfileRequest.getUsername())) {
+            throw new UsernameAlreadyExists("Username %s already exists.".formatted(editProfileRequest.getUsername()));
+        }
+
+        if (!user.getEmail().equals(editProfileRequest.getEmail()) &&
+                userRepository.existsByEmail(editProfileRequest.getEmail())) {
+            throw new EmailAlreadyExists("Email %s already exists.".formatted(editProfileRequest.getEmail()));
+        }
+
+        user.setFirstName(editProfileRequest.getFirstName());
+        user.setLastName(editProfileRequest.getLastName());
+        user.setEmail(editProfileRequest.getEmail());
+        user.setUsername(editProfileRequest.getUsername());
+
+        userRepository.save(user);
     }
 }

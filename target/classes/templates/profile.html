@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="stylesheet" href="/css/profile.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 
@@ -12,216 +12,230 @@
 <body>
 <header class="main-header">
     <div class="header-left">
-        <img src="/images/home.jpg" alt="Logo" />
+        <img src="/images/home.jpg" alt="Logo"/>
     </div>
     <div class="header-content">
         <h1 class="welcome-title">Welcome to Our Page!</h1>
-        <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <nav class="header-nav">
-                <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-                <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
-                <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
-                    <i class="fas fa-chart-bar"></i>
-                    Statistics
-                </a>
-                <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
-                <a th:href="@{/user/profile}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
-            </nav>
+        <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?)
+            and let’s get things rolling.</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <nav class="header-nav">
+            <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
+            <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
+                <i class="fas fa-chart-bar"></i>
+                Statistics
+            </a>
+            <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+            <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i>
+                Profile</a>
+        </nav>
     </div>
 
 </header>
 
 <main class="profile-page">
-    <div id="editProfileBtnWrapper">
-        <span class="profile-title">Profile</span>
 
-        <form action="" th:method="PUT">
-            <button id="editProfileBtn" class="edit-button">Save Changes</button>
-        </form>
-
-    </div>
+    <h2 class="profile-title">Edit Your Profile</h2>
 
     <br>
-    <div class="profile-info">
-        <div class="field">
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" placeholder="First name...">
+    <form th:action="@{'/user/' + ${user.id} + '/profile'}" th:method="PUT" th:object="${editProfileRequest}">
+        <div class="profile-info">
+
+            <div class="field">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" placeholder="First name..." th:field="*{firstName}">
+                <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+            </div>
+
+            <div class="field">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" placeholder="Last name..." th:field="*{lastName}">
+                <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+            </div>
+
+            <div class="field">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Username..." th:field="*{username}">
+                <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+                <small th:text="${usernameAlreadyExistMessage}"></small>
+            </div>
+
+            <div class="field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Email..." th:field="*{email}">
+                <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:field="*{email}"></small>
+                <small th:text="${emailAlreadyExistMessage}"></small>
+            </div>
+
         </div>
 
-        <div class="field">
-            <label for="password">Password:</label>
-            <input type="password" id="password" placeholder="Password...">
-        </div>
+        <button class="edit-button">Save Changes</button>
 
-        <div class="field">
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" placeholder="Last name...">
-        </div>
-
-        <div class="field">
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm password...">
-        </div>
-
-        <div class="field">
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Username...">
-        </div>
-
-        <div class="field">
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Email...">
-        </div>
-
-    </div>
+    </form>
 
     <div class="faq-section">
         <h2>Frequently Asked Questions</h2>
-        <div class="faq">
-            <button class="faq-question">How do I change my password?</button>
-            <div class="faq-answer">
-                <p>To change your password, go to settings and click "Change Password".</p>
+
+        <div th:if="${user.role.name() == 'CUSTOMER'}">
+
+            <div class="faq">
+                <button class="faq-question">How do I contact support?</button>
+                <div class="faq-answer">
+                    <p>You can contact support via email at support@example.com.</p>
+                </div>
+            </div>
+
+            <div class="faq">
+                <button class="faq-question">What should I do if my order is delayed?</button>
+                <div class="faq-answer">
+                    <p>If your order is delayed, you can contact our support team through the app or website to get the
+                        latest status on your delivery.</p>
+                </div>
+            </div>
+
+            <div class="faq">
+                <button class="faq-question">Can I change my order after confirming it?</button>
+                <div class="faq-answer">
+                    <p>Changes to an order after confirmation are not always possible. We recommend contacting us as
+                        soon as
+                        possible to check if a change can be made.</p>
+                </div>
+            </div>
+
+            <div class="faq">
+                <button class="faq-question">What payment methods are accepted?</button>
+                <div class="faq-answer">
+                    <p>We accept various payment methods, including credit and debit cards, as well as mobile wallets
+                        like
+                        Apple Pay and Google Pay.</p>
+                </div>
+            </div>
+
+            <div class="faq">
+                <button class="faq-question">How can I cancel my order?</button>
+                <div class="faq-answer">
+                    <p>If you wish to cancel an order, please contact us as soon as possible. Cancellations can only be
+                        made
+                        before the restaurant has started preparing the order.</p>
+                </div>
+            </div>
+
+            <div class="faq">
+                <button class="faq-question">Can I receive my order contactless?</button>
+                <div class="faq-answer">
+                    <p>Yes, we offer a contactless delivery option. You can select this option during checkout.</p>
+                </div>
             </div>
         </div>
 
-        <div class="faq">
-            <button class="faq-question">How do I contact support?</button>
-            <div class="faq-answer">
-                <p>You can contact support via email at support@example.com.</p>
+        <div th:if="${user.role.name() == 'EMPLOYEE'}">
+            <div class="faq">
+                <button class="faq-question">How do I track my deliveries?</button>
+                <div class="faq-answer">
+                    <p>You can track your deliveries through the driver’s app, which provides real-time updates
+                        about
+                        your
+                        current and upcoming deliveries.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="faq">
-            <button class="faq-question">How do I change my delivery address?</button>
-            <div class="faq-answer">
-                <p>You can update your delivery address directly in the app or website by going to the "My Profile" or "Addresses" section.</p>
+            <div class="faq">
+                <button class="faq-question">How do I receive payment for my deliveries?</button>
+                <div class="faq-answer">
+                    <p>Payments are typically made weekly or bi-weekly, depending on the platform, directly to
+                        your bank
+                        account
+                        or via another payment method you select.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="faq">
-            <button class="faq-question">What should I do if my order is delayed?</button>
-            <div class="faq-answer">
-                <p>If your order is delayed, you can contact our support team through the app or website to get the latest status on your delivery.</p>
+            <div class="faq">
+                <button class="faq-question">How is the delivery fee calculated?</button>
+                <div class="faq-answer">
+                    <p>The delivery fee is usually based on factors such as distance, time, and type of
+                        delivery, as
+                        well as any
+                        additional tips from the customer.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="faq">
-            <button class="faq-question">Can I change my order after confirming it?</button>
-            <div class="faq-answer">
-                <p>Changes to an order after confirmation are not always possible. We recommend contacting us as soon as possible to check if a change can be made.</p>
+            <div class="faq">
+                <button class="faq-question">Can I choose the deliveries I want to accept?</button>
+                <div class="faq-answer">
+                    <p>Yes, you can choose which deliveries to accept based on your location, availability, and
+                        preference for
+                        delivery type.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="faq">
-            <button class="faq-question">What payment methods are accepted?</button>
-            <div class="faq-answer">
-                <p>We accept various payment methods, including credit and debit cards, as well as mobile wallets like Apple Pay and Google Pay.</p>
+            <div class="faq">
+                <button class="faq-question">What happens if I miss a delivery?</button>
+                <div class="faq-answer">
+                    <p>If you miss a delivery, it may be reassigned to another driver, and you could be
+                        penalized
+                        depending on
+                        the platform’s policies.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="faq">
-            <button class="faq-question">How can I cancel my order?</button>
-            <div class="faq-answer">
-                <p>If you wish to cancel an order, please contact us as soon as possible. Cancellations can only be made before the restaurant has started preparing the order.</p>
+            <div class="faq">
+                <button class="faq-question">How do I contact support if I have an issue during a delivery?
+                </button>
+                <div class="faq-answer">
+                    <p>If you have an issue, you can contact the platform’s customer support team directly
+                        through the
+                        driver’s
+                        app or via the website.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="faq">
-            <button class="faq-question">Can I receive my order contactless?</button>
-            <div class="faq-answer">
-                <p>Yes, we offer a contactless delivery option. You can select this option during checkout.</p>
+            <div class="faq">
+                <button class="faq-question">What should I do if the customer is not available to receive the
+                    delivery?
+                </button>
+                <div class="faq-answer">
+                    <p>If the customer is not available, you should follow the platform’s procedure, which
+                        usually
+                        involves
+                        contacting the customer or returning the delivery to the restaurant.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="faq">
-            <button class="faq-question">How do I contact customer support?</button>
-            <div class="faq-answer">
-                <p>You can reach our support team through the "Help" section in the app or website, where you'll find contact information and frequently asked questions.</p>
+            <div class="faq">
+                <button class="faq-question">Is there a limit to how many hours I can work in a day?</button>
+                <div class="faq-answer">
+                    <p>The working hours for delivery drivers depend on local laws and the platform, but
+                        generally,
+                        there are no
+                        strict limits unless specified by the service.</p>
+                </div>
             </div>
+
         </div>
-    </div>
-    <br>
-    <br>
 
-    <div class="faq">
-        <button class="faq-question">How do I track my deliveries?</button>
-        <div class="faq-answer">
-            <p>You can track your deliveries through the driver’s app, which provides real-time updates about your current and upcoming deliveries.</p>
+        <div class="logout-container">
+
+            <a class="logout-button" th:href="@{/logout}">Log Out</a>
+
         </div>
+
     </div>
-
-    <div class="faq">
-        <button class="faq-question">How do I receive payment for my deliveries?</button>
-        <div class="faq-answer">
-            <p>Payments are typically made weekly or bi-weekly, depending on the platform, directly to your bank account or via another payment method you select.</p>
-        </div>
     </div>
-
-    <div class="faq">
-        <button class="faq-question">How is the delivery fee calculated?</button>
-        <div class="faq-answer">
-            <p>The delivery fee is usually based on factors such as distance, time, and type of delivery, as well as any additional tips from the customer.</p>
-        </div>
-    </div>
-
-    <div class="faq">
-        <button class="faq-question">Can I choose the deliveries I want to accept?</button>
-        <div class="faq-answer">
-            <p>Yes, you can choose which deliveries to accept based on your location, availability, and preference for delivery type.</p>
-        </div>
-    </div>
-
-    <div class="faq">
-        <button class="faq-question">What happens if I miss a delivery?</button>
-        <div class="faq-answer">
-            <p>If you miss a delivery, it may be reassigned to another driver, and you could be penalized depending on the platform’s policies.</p>
-        </div>
-    </div>
-
-    <div class="faq">
-        <button class="faq-question">How do I contact support if I have an issue during a delivery?</button>
-        <div class="faq-answer">
-            <p>If you have an issue, you can contact the platform’s customer support team directly through the driver’s app or via the website.</p>
-        </div>
-    </div>
-
-    <div class="faq">
-        <button class="faq-question">What should I do if the customer is not available to receive the delivery?</button>
-        <div class="faq-answer">
-            <p>If the customer is not available, you should follow the platform’s procedure, which usually involves contacting the customer or returning the delivery to the restaurant.</p>
-        </div>
-    </div>
-
-    <div class="faq">
-        <button class="faq-question">Is there a limit to how many hours I can work in a day?</button>
-        <div class="faq-answer">
-            <p>The working hours for delivery drivers depend on local laws and the platform, but generally, there are no strict limits unless specified by the service.</p>
-        </div>
-    </div>
-
-    <div class="logout-container">
-        <form action="/logout" method="POST">
-            <button type="submit" class="logout-button">Log Out</button>
-        </form>
-    </div>
-
-
-
 </main>
 
 <script>
 
     document.querySelectorAll('.faq-question').forEach(button => {
-      button.addEventListener('click', () => {
-        const answer = button.nextElementSibling;
-        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-        button.classList.toggle('active');
-      });
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            button.classList.toggle('active');
+        });
     });
 
 
@@ -230,21 +244,21 @@
 
     editProfileBtn.addEventListener('click', () => {
 
-      profileFields.forEach(field => {
-        field.disabled = !field.disabled;
-      });
+        profileFields.forEach(field => {
+            field.disabled = !field.disabled;
+        });
 
-      if (editProfileBtn.innerText === 'Edit Profile') {
-        editProfileBtn.innerText = 'Save Changes';
-      } else {
-        editProfileBtn.innerText = 'Edit Profile';
-      }
+        if (editProfileBtn.innerText === 'Edit Profile') {
+            editProfileBtn.innerText = 'Save Changes';
+        } else {
+            editProfileBtn.innerText = 'Edit Profile';
+        }
     });
 
 
     const userRole = 'employee';
     if (userRole !== 'employee') {
-      document.getElementById('editProfileBtnWrapper').style.display = 'none';
+        document.getElementById('editProfileBtnWrapper').style.display = 'none';
     }
 </script>
 </body>

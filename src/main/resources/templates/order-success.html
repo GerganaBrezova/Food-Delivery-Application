@@ -30,7 +30,7 @@
         Statistics
       </a>
       <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
-      <a th:href="@{/user/profile}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+      <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
     </nav>
   </div>
 

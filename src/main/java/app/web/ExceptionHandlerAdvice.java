@@ -1,6 +1,7 @@
 package app.web;
 
 import app.exceptions.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -44,21 +45,27 @@ public class ExceptionHandlerAdvice {
 //    }
 
     @ExceptionHandler(UsernameAlreadyExists.class)
-    public String handleUsernameAlreadyExists(RedirectAttributes redirectAttributes, UsernameAlreadyExists usernameException) {
+    public String handleUsernameAlreadyExists(RedirectAttributes redirectAttributes,
+                                              UsernameAlreadyExists usernameException,
+                                              HttpServletRequest request) {
 
         String message = usernameException.getMessage();
         redirectAttributes.addFlashAttribute("usernameAlreadyExistMessage", message);
 
-        return "redirect:/register";
+        String referer = request.getHeader("Referer");
+        return referer != null ? "redirect:" + referer : "redirect:/register";
     }
 
     @ExceptionHandler(EmailAlreadyExists.class)
-    public String handleEmailAlreadyExists(RedirectAttributes redirectAttributes, EmailAlreadyExists emailException) {
+    public String handleEmailAlreadyExists(RedirectAttributes redirectAttributes,
+                                           EmailAlreadyExists emailException,
+                                           HttpServletRequest request) {
 
         String message = emailException.getMessage();
         redirectAttributes.addFlashAttribute("emailAlreadyExistMessage", message);
 
-        return "redirect:/register";
+        String referer = request.getHeader("Referer");
+        return referer != null ? "redirect:" + referer : "redirect:/register";
     }
 
     @ExceptionHandler(PasswordsDoNotMatch.class)

@@ -20,14 +20,12 @@ public class EditProfileRequest {
     @NotBlank(message = "Last name can not be empty.")
     private String lastName;
 
+    @Size(min = 5, max = 15, message = "Username must be between 5 and 15 symbols.")
+    @NotBlank(message = "Username can not be empty.")
+    private String username;
+
     @Email(message = "Please enter a valid email format.")
     @NotBlank(message = "Email can not be empty.")
     private String email;
-
-    @Size(min = 5, message = "Password must be at least 5 symbols.")
-    private String password;
-
-    @Size(min = 5, message = "Password must be at least 5 symbols.")
-    private String confirmPassword;
 
 }
