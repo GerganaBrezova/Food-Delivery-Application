@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 
@@ -12,7 +12,7 @@
 <body>
 <header class="main-header">
     <div class="header-left">
-        <img src="home.jpg" alt="Logo" />
+        <img src="/images/home.jpg" alt="Logo" />
     </div>
     <div class="header-content">
         <h1 class="welcome-title">Welcome to Our Page!</h1>
@@ -23,11 +23,14 @@
             <br>
             <br>
             <nav class="header-nav">
-                <a href="#" class="nav-button"><i class="fas fa-home"></i> Home</a>
-                <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
-                <a href="#" class="nav-button"><i class="fas fa-chart-bar"></i> Statistics</a>
-                <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
-                <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+                <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
+                <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+                <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
+                    <i class="fas fa-chart-bar"></i>
+                    Statistics
+                </a>
+                <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+                <a th:href="@{/user/profile}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
             </nav>
     </div>
 
@@ -36,9 +39,11 @@
 <main class="profile-page">
     <div id="editProfileBtnWrapper">
         <span class="profile-title">Profile</span>
+
         <form action="/edit-profile" method="POST">
-            <button id="editProfileBtn" class="edit-button">Edit Profile</button>
+            <button id="editProfileBtn" class="edit-button">Save Changes</button>
         </form>
+
     </div>
 
     <br>
