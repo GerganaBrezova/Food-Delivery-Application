@@ -30,8 +30,8 @@
                 <i class="fas fa-chart-bar"></i>
                 Statistics
             </a>
-            <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
-            <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+            <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+            <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
         </nav>
     </div>
 </header>
@@ -41,16 +41,15 @@
 </form>
 
 <main class="categories-container">
-    <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-    <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
-    <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
-        <i class="fas fa-chart-bar"></i>
-        Statistics
+    <a th:each="category : ${categories}"
+       th:href="@{/products(brandId=${brandId}, location=${location}, categoryName=${category.name()})}"
+       class="category-link">
+        <div class="category-card"
+             th:style="'background-image: url(/images/' + ${category.name().toLowerCase()} + '.jpg)'">
+            <h2 class="category-title" th:text="${category.name()}"></h2>
+        </div>
     </a>
-    <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
-    <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
 </main>
-
 
 </body>
 
