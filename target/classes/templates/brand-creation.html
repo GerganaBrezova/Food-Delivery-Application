@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="brand-creation.css" />
+  <link rel="stylesheet" href="/css/brand-creation.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 
@@ -12,23 +12,26 @@
 <body>
 <header class="main-header">
   <div class="header-left">
-    <img src="home.jpg" alt="Logo" />
+    <img src="/images/home.jpg" alt="Logo" />
   </div>
   <div class="header-content">
     <h1 class="welcome-title">Welcome to Our Page!</h1>
     <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <nav class="header-nav">
-        <a href="#" class="nav-button"><i class="fas fa-home"></i> Home</a>
-        <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
-        <a href="#" class="nav-button"><i class="fas fa-chart-bar"></i> Statistics</a>
-        <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
-        <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
-      </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="header-nav">
+      <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
+      <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-shopping-basket"></i> Basket</a>
+      <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
+        <i class="fas fa-chart-bar"></i>
+        Statistics
+      </a>
+      <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
+      <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+    </nav>
   </div>
 
 </header>
@@ -36,35 +39,22 @@
 <main class="add-brand-form">
   <h1>Add a new brand</h1>
 
-  <form id="brandForm" action="/save-brand" method="POST">
+  <form id="brandForm" th:action="@{/company/add}" th:method="POST" th:object="${createCompanyRequest}">
 
     <div class="brand-info">
-      <label>Brand photo (URL link):</label>
-      <input type="text" name="brandImage" placeholder="Enter image URL" />
 
-      <label>Brand Name:</label>
-      <input type="text" name="brandName" placeholder="Enter name" />
+      <label for="logo-url">Brand photo (URL link):</label>
+      <input type="text" id="logo-url" placeholder="Enter image URL" th:field="*{logoUrl}">
+      <small th:if="${#fields.hasErrors('logoUrl')}" th:errors="*{logoUrl}"></small>
 
-      <label>Brand Motto:</label>
-      <input type="text" name="brandMotto" placeholder="Enter motto" />
-    </div>
+      <label for="name">Brand Name:</label>
+      <input type="text" id="name" placeholder="Enter name" th:field="*{name}">
+      <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
 
-    <div class="products-section">
-      <h2>Add products</h2>
+      <label for="description">Brand Motto:</label>
+      <input type="text" id="description" placeholder="Enter motto" th:field="*{description}">
+      <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
 
-      <div class="product-row">
-        <input type="text" name="productName[]" placeholder="Product name" />
-        <input type="number" name="productPrice[]" placeholder="Price" />
-        <select name="productCategory[]">
-          <option value="appetizer">Appetizer</option>
-          <option value="main">Main</option>
-          <option value="drink">Drink</option>
-          <option value="dessert">Dessert</option>
-        </select>
-        <button type="button" class="remove-btn">×</button>
-      </div>
-
-      <button type="button" id="addProductBtn">+ Add product</button>
     </div>
 
     <button type="submit" class="submitBtn">Save brand</button>
@@ -72,36 +62,4 @@
   </form>
 </main>
 
-<script>
-  const addProductBtn = document.getElementById('addProductBtn');
-  const productsSection = document.querySelector('.products-section');
-
-  addProductBtn.addEventListener('click', () => {
-    const productRow = document.createElement('div');
-    productRow.classList.add('product-row');
-    productRow.innerHTML = `
-      <input type="text" name="productName[]" placeholder="Product name" />
-      <input type="number" name="productPrice[]" placeholder="Price" />
-      <select name="productCategory[]">
-        <option value="appetizer">Appetizer</option>
-        <option value="main">Main</option>
-        <option value="drink">Drink</option>
-        <option value="dessert">Dessert</option>
-      </select>
-      <button type="button" class="remove-btn">×</button>
-    `;
-    productsSection.insertBefore(productRow, addProductBtn);
-
-    const removeBtn = productRow.querySelector('.remove-btn');
-    removeBtn.addEventListener('click', () => {
-      productRow.remove();
-    });
-  });
-
-  document.querySelectorAll('.remove-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.target.parentElement.remove();
-    });
-  });
-</script>
 </body>

@@ -3,13 +3,11 @@ package app.company.service;
 import app.company.model.Company;
 import app.company.repository.CompanyRepository;
 import app.exceptions.CompanyNotFound;
-import app.product.model.Product;
-import app.product.model.ProductCategory;
+import app.restaurant.model.Restaurant;
+import app.web.dto.CreateCompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,5 +35,31 @@ public class CompanyService {
 
     public Company getCompanyById(UUID brandId) {
         return companyRepository.findById(brandId).orElseThrow(() -> new CompanyNotFound("Company with id [%s] not found]".formatted(brandId)));
+    }
+
+    public void createCompany(CreateCompanyRequest createCompanyRequest) {
+
+        Restaurant sofia = Restaurant.builder()
+                .name(createCompanyRequest.getName())
+                .address("Sofia")
+                .build();
+
+        Restaurant plovdiv = Restaurant.builder()
+                .name(createCompanyRequest.getName())
+                .address("Plovdiv")
+                .build();
+
+        List<Restaurant> restaurants = List.of(sofia, plovdiv);
+
+        Company company = Company.builder()
+                .name(createCompanyRequest.getName())
+                .description(createCompanyRequest.getDescription())
+                .logoUrl(createCompanyRequest.getLogoUrl())
+                .restaurants(restaurants)
+                .build();
+
+        restaurants.forEach(r -> r.setCompany(company));
+
+        companyRepository.save(company);
     }
 }

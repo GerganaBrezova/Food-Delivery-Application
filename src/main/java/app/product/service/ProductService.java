@@ -8,7 +8,9 @@ import app.product.model.Product;
 import app.product.model.ProductCategory;
 import app.product.repository.ProductRepository;
 import app.restaurant.model.Restaurant;
+import app.web.dto.CreateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,7 +26,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     @Autowired
-    public ProductService(CompanyService companyService, ProductRepository productRepository) {
+    public ProductService(@Lazy CompanyService companyService, ProductRepository productRepository) {
         this.companyService = companyService;
         this.productRepository = productRepository;
     }
@@ -74,5 +76,17 @@ public class ProductService {
     public Product getProductById(UUID productId) {
         return productRepository.findById(productId).orElseThrow(() -> new ProductNotFound("Product with id [%s] not found.".formatted(productId)));
     }
+
+//    public Product createProduct(CreateProductRequest createProductRequest) {
+//
+//        Product product = Product.builder()
+//                .name(createProductRequest.getName())
+//                .category(ProductCategory.valueOf(createProductRequest.getCategory().name()))
+//                .price(createProductRequest.getPrice())
+//                .imageUrl(createProductRequest.getImageUrl())
+//                .build();
+//
+//        return productRepository.save(product);
+//    }
 }
 
