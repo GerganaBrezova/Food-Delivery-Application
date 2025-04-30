@@ -25,20 +25,16 @@
         <br>
         <nav class="header-nav">
             <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-            <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-shopping-basket"></i> Basket</a>
             <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
                 <i class="fas fa-chart-bar"></i>
                 Statistics
             </a>
-            <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+            <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
             <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
         </nav>
     </div>
 </header>
-
-<form class="top-controls" th:if="${user.role.name() == 'EMPLOYEE'}">
-    <button class="add-button">+</button>
-</form>
 
 <main class="categories-container">
     <a th:each="category : ${categories}"

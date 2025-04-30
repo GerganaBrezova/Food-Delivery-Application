@@ -25,12 +25,12 @@
         <br>
         <nav class="header-nav">
             <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-            <a th:href="@{/orders/basket}" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-shopping-basket"></i> Basket</a>
             <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
                 <i class="fas fa-chart-bar"></i>
                 Statistics
             </a>
-            <a th:href="@{/orders}" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+            <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
             <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
         </nav>
     </div>
@@ -56,8 +56,12 @@
                 <span class="product-price"
                       th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></span>
 
-                <form th:action="@{'/orders/basket/add-product/' + ${product.id}}" th:method="POST">
-                    <button type="submit" class="add-button">Add To Cart</button>
+                <form th:if="${user.role.name() == 'CUSTOMER'}" th:action="@{'/orders/basket/add-product/' + ${product.id}}" th:method="POST">
+                    <button type="submit" class="add-or-edit-button">Add To Cart</button>
+                </form>
+
+                <form th:if="${user.role.name() == 'EMPLOYEE'}" th:action="@{/}" th:method="PUT">
+                    <button type="submit" class="add-or-edit-button">Edit</button>
                 </form>
 
             </div>

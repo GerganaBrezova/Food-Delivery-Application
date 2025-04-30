@@ -192,7 +192,7 @@
   }
 
 
-  .add-button {
+  .add-or-edit-button {
     background-color: #531c1c;
     color: white;
     border: none;
@@ -203,7 +203,7 @@
     transition: background-color 0.3s ease;
   }
 
-  .add-button:hover {
+  .add-or-edit-button:hover {
     background-color: #7b2929;
   }
 
