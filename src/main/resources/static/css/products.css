@@ -208,7 +208,8 @@
   }
 
   p {
-    color: red;
+    color: black;
+    line-height: 50px;
     font-size: 20px;
     font-weight: 400;
     text-align: center;

@@ -40,7 +40,7 @@
 <main class="brands-container">
 
     <div th:if="${categoryProducts == null || categoryProducts.isEmpty()}">
-        <p class="no-products-message">There are no products available.</p>
+        <p class="no-products-message">We're still cooking! <br>Some product categories are not available yet, but they'll be added soon. <br>Stay tuned for delicious updates!</p>
     </div>
 
     <div th:if="${categoryProducts != null && !categoryProducts.isEmpty()}" th:each="product : ${categoryProducts}"
