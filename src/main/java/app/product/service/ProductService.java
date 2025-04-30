@@ -26,7 +26,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     @Autowired
-    public ProductService(@Lazy CompanyService companyService, ProductRepository productRepository) {
+    public ProductService(CompanyService companyService, ProductRepository productRepository) {
         this.companyService = companyService;
         this.productRepository = productRepository;
     }
