@@ -104,4 +104,8 @@ public class OrderService {
             throw new NoAddressSelected("Please enter an address!");
         }
     }
+
+    public void saveAll(List<Order> orders) {
+        orderRepository.saveAll(orders);
+    }
 }

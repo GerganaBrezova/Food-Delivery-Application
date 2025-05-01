@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -54,5 +55,9 @@ public class RestaurantService {
 
         restaurantRepository.save(restaurant);
         companyService.saveCompany(company);
+    }
+
+    public void saveAll(List<Restaurant> restaurants) {
+        restaurantRepository.saveAll(restaurants);
     }
 }

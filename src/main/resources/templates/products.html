@@ -49,8 +49,8 @@
     <div th:if="${categoryProducts != null && !categoryProducts.isEmpty()}" th:each="product : ${categoryProducts}"
          class="brand-card" th:style="'background-image: url(' + ${product.imageUrl} + ')'">
 
-        <form action="" th:if="${user.role.name() == 'EMPLOYEE'}">
-            <button type="button" class="delete-button">×</button>
+        <form th:action="@{'/products/' + ${product.id} + '/delete'}" th:method="DELETE" th:if="${user.role.name() == 'EMPLOYEE'}">
+            <button type="submit" class="delete-button">×</button>
         </form>
 
         <div class="brand-info">

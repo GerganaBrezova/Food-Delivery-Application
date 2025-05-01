@@ -49,7 +49,7 @@
 
         <div class="brand-card">
 
-            <form th:if="${user.role.name() == 'EMPLOYEE'}">
+            <form th:action="@{'/company/' + ${company.id} + '/delete'}" th:method="DELETE" th:if="${user.role.name() == 'EMPLOYEE'}">
                 <button type="submit" class="delete-button">×</button>
             </form>
 

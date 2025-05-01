@@ -1,5 +1,6 @@
 package app.web;
 
+import app.company.model.Company;
 import app.company.service.CompanyService;
 import app.security.UserAuthDetails;
 import app.user.model.User;
@@ -10,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/company")
@@ -55,6 +56,16 @@ public class CompanyController {
         companyService.createCompany(createCompanyRequest);
 
         return new ModelAndView("redirect:/home");
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public String deleteCompany(@PathVariable UUID id) {
+
+        Company company = companyService.getCompanyById(id);
+
+        companyService.deleteCompany(company);
+
+        return "redirect:/home";
     }
 
 }

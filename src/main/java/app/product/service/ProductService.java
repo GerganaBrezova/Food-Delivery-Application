@@ -4,13 +4,14 @@ import app.company.model.Company;
 import app.company.service.CompanyService;
 import app.exceptions.ProductNotFound;
 import app.exceptions.RestaurantNotFound;
+import app.order.service.OrderService;
 import app.product.model.Product;
 import app.product.model.ProductCategory;
 import app.product.repository.ProductRepository;
 import app.restaurant.model.Restaurant;
 import app.restaurant.service.RestaurantService;
-import app.web.dto.CreateOrEditProductRequest;
-import jakarta.validation.Valid;
+import app.web.dto.CreateProductRequest;
+import app.web.dto.EditProductRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,12 +30,14 @@ public class ProductService {
     private final CompanyService companyService;
     private final ProductRepository productRepository;
     private final RestaurantService restaurantService;
+    private final OrderService orderService;
 
     @Autowired
-    public ProductService(CompanyService companyService, ProductRepository productRepository, RestaurantService restaurantService) {
+    public ProductService(CompanyService companyService, ProductRepository productRepository, RestaurantService restaurantService, OrderService orderService) {
         this.companyService = companyService;
         this.productRepository = productRepository;
         this.restaurantService = restaurantService;
+        this.orderService = orderService;
     }
 
     public List<Product> generateUniqueProductsForBrand(String brandName) {
@@ -83,21 +86,44 @@ public class ProductService {
         return productRepository.findById(productId).orElseThrow(() -> new ProductNotFound("Product with id [%s] not found.".formatted(productId)));
     }
 
-    public void addNewProduct(CreateOrEditProductRequest createOrEditProductRequest) {
+    public void addNewProduct(CreateProductRequest createProductRequest) {
 
-        Restaurant restaurant = restaurantService.getRestaurantByBrandAndLocation(createOrEditProductRequest.getBrandName(), createOrEditProductRequest.getRestaurantAddress());
+        Restaurant restaurant = restaurantService.getRestaurantByBrandAndLocation(createProductRequest.getBrandName(), createProductRequest.getRestaurantAddress());
 
         Product product = Product.builder()
-                .name(createOrEditProductRequest.getName())
-                .category(createOrEditProductRequest.getCategory())
-                .price(createOrEditProductRequest.getPrice())
-                .imageUrl(createOrEditProductRequest.getImageUrl())
+                .name(createProductRequest.getName())
+                .category(createProductRequest.getCategory())
+                .price(createProductRequest.getPrice())
+                .imageUrl(createProductRequest.getImageUrl())
                 .build();
 
         restaurant.getProducts().add(product);
 
         productRepository.save(product);
         restaurantService.saveRestaurant(restaurant);
+    }
+
+    public void editProduct(EditProductRequest editProductRequest, UUID productId) {
+
+        Product product = getProductById(productId);
+
+        product.setName(editProductRequest.getName());
+        product.setCategory(editProductRequest.getCategory());
+        product.setPrice(editProductRequest.getPrice());
+        product.setImageUrl(editProductRequest.getImageUrl());
+
+        productRepository.save(product);
+    }
+
+    public void deleteProduct(Product product) {
+
+        product.getRestaurants().forEach(restaurant -> restaurant.getProducts().remove(product));
+        product.getOrders().forEach(order -> order.getProducts().remove(product));
+
+        restaurantService.saveAll(product.getRestaurants());
+        orderService.saveAll(product.getOrders());
+
+        productRepository.delete(product);
     }
 }
 

@@ -5,9 +5,9 @@ import app.product.service.ProductService;
 import app.security.UserAuthDetails;
 import app.user.model.User;
 import app.user.service.UserService;
-import app.web.dto.CreateOrEditProductRequest;
+import app.web.dto.CreateProductRequest;
+import app.web.dto.EditProductRequest;
 import app.web.mapper.DtoMapper;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -57,14 +57,14 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("product-creation");
         modelAndView.addObject("user", user);
-        modelAndView.addObject("createOrEditProductRequest", new CreateOrEditProductRequest());
+        modelAndView.addObject("createProductRequest", new CreateProductRequest());
 
         return modelAndView;
     }
 
     @PostMapping("/add")
     public ModelAndView addNewProduct(@AuthenticationPrincipal UserAuthDetails userAuthDetails,
-                                      @Valid CreateOrEditProductRequest createOrEditProductRequest,
+                                      @Valid CreateProductRequest createProductRequest,
                                       BindingResult bindingResult) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -75,7 +75,7 @@ public class ProductController {
             return modelAndView;
         }
 
-        productService.addNewProduct(createOrEditProductRequest);
+        productService.addNewProduct(createProductRequest);
 
         return new ModelAndView("redirect:/home");
     }
@@ -90,8 +90,41 @@ public class ProductController {
         modelAndView.setViewName("edit-product");
         modelAndView.addObject("user", user);
         modelAndView.addObject("product", product);
-        modelAndView.addObject("createOrEditProductRequest", DtoMapper.mapToCreateOrEditProductRequest(product));
+        modelAndView.addObject("editProductRequest", DtoMapper.mapToEditProductRequest(product));
 
         return modelAndView;
+    }
+
+    @PutMapping("/{id}/edit")
+    public ModelAndView editProduct(@AuthenticationPrincipal UserAuthDetails userAuthDetails,
+                                    @Valid EditProductRequest editProductRequest,
+                                    BindingResult bindingResult,
+                                    @PathVariable UUID id) {
+
+        if (bindingResult.hasErrors()) {
+            User user = userService.getUserById(userAuthDetails.getId());
+            Product product = productService.getProductById(id);
+
+            ModelAndView modelAndView = new ModelAndView("edit-product");
+            modelAndView.addObject("user", user);
+            modelAndView.addObject("product", product);
+            modelAndView.addObject("editProductRequest", editProductRequest);
+
+            return modelAndView;
+        }
+
+        productService.editProduct(editProductRequest, id);
+
+        return new ModelAndView("redirect:/home");
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public String deleteProduct(@PathVariable UUID id) {
+
+        Product product = productService.getProductById(id);
+
+        productService.deleteProduct(product);
+
+        return "redirect:/home";
     }
 }

@@ -40,7 +40,7 @@
 
     <h1>Edit product details</h1>
 
-    <form th:action="@{'/products/' + ${product.id} + '/edit'}" th:method="PUT" th:object="${createOrEditProductRequest}">
+    <form th:action="@{'/products/' + ${product.id} + '/edit'}" th:method="PUT" th:object="${editProductRequest}">
 
         <div class="product-info">
 

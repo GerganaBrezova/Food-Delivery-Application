@@ -13,14 +13,13 @@ import org.hibernate.validator.constraints.URL;
 
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class CreateOrEditProductRequest {
+public class CreateProductRequest {
 
     @Size(min = 1, max = 30, message = "Product name must be at least 1 symbol.")
     private String name;

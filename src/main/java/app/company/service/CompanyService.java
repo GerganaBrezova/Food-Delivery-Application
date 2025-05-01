@@ -79,4 +79,9 @@ public class CompanyService {
 
         return restaurantsByCompany;
     }
+
+    public void deleteCompany(Company company) {
+
+        companyRepository.delete(company);
+    }
 }

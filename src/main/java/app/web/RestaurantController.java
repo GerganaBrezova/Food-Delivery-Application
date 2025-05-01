@@ -1,12 +1,10 @@
 package app.web;
 
 import app.product.model.ProductCategory;
-import app.restaurant.model.Restaurant;
 import app.restaurant.service.RestaurantService;
 import app.security.UserAuthDetails;
 import app.user.model.User;
 import app.user.service.UserService;
-import app.web.dto.CreateOrEditProductRequest;
 import app.web.dto.CreateRestaurantRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
