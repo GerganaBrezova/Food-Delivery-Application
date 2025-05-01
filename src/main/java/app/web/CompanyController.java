@@ -68,4 +68,16 @@ public class CompanyController {
         return "redirect:/home";
     }
 
+    @GetMapping("/statistics")
+    public ModelAndView getCompanyStatisticsPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("statistics");
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
+
 }

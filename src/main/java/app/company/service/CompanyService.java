@@ -81,7 +81,6 @@ public class CompanyService {
     }
 
     public void deleteCompany(Company company) {
-
         companyRepository.delete(company);
     }
 }
