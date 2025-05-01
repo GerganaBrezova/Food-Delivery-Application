@@ -37,7 +37,7 @@
 </header>
 `
 <div class="top-controls" th:if="${user.role.name() == 'EMPLOYEE'}">
-    <a th:href="@{/company/add}" class="add-button">+</a>
+    <a th:href="@{/products/add}" class="add-button">+</a>
 </div>
 
 <main class="brands-container">
@@ -63,9 +63,9 @@
                     <button type="submit" class="add-or-edit-button">Add To Cart</button>
                 </form>
 
-                <form th:if="${user.role.name() == 'EMPLOYEE'}" th:action="@{/}" th:method="PUT">
+                <a th:href="@{'/products/' + ${product.id} + '/edit'}" th:if="${user.role.name() == 'EMPLOYEE'}">
                     <button type="submit" class="add-or-edit-button">Edit</button>
-                </form>
+                </a>
 
             </div>
         </div>

@@ -8,9 +8,7 @@ import app.product.model.Product;
 import app.product.model.ProductCategory;
 import app.product.repository.ProductRepository;
 import app.restaurant.model.Restaurant;
-import app.web.dto.CreateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -77,7 +75,7 @@ public class ProductService {
         return productRepository.findById(productId).orElseThrow(() -> new ProductNotFound("Product with id [%s] not found.".formatted(productId)));
     }
 
-//    public Product createProduct(CreateProductRequest createProductRequest) {
+//    public Product createProduct(CreateOrEditProductRequest createProductRequest) {
 //
 //        Product product = Product.builder()
 //                .name(createProductRequest.getName())

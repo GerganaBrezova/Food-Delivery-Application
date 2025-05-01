@@ -2,118 +2,118 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-  body {
+body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
 
 
-  .welcome-title {
+.welcome-title {
     font-size: 2em;
     color: #eae8e8;
     text-align: left;
     font-weight: bold;
     margin-bottom: 20px;
-  }
+}
 
-  .welcome-text {
+.welcome-text {
     font-size: 1em;
     color: #eae8e8;
     text-align: left;
     font-weight: bold;
     margin-bottom: 20px;
-  }
+}
 
 
-  .main-header {
+.main-header {
     width: 100%;
     display: flex;
     background: #531c1c;
     padding: 0px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     flex-wrap: wrap;
     border-radius: 15px;
     overflow: hidden;
-  }
+}
 
-  .header-left {
+.header-left {
     margin: 0;
     padding: 0;
-  }
+}
 
-  .header-left img {
+.header-left img {
     width: 450px;
     height: auto;
     object-fit: cover;
     display: block;
     margin: 0;
-  }
+}
 
-  .header-content {
+.header-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 20px;
     flex-grow: 1;
-  }
+}
 
-  .header-nav {
+.header-nav {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
     justify-content: left;
-  }
+}
 
-  .nav-button {
+.nav-button {
     padding: 10px 20px;
     border-radius: 20px;
     background-color: #f0f0f0;
     color: #333;
     text-decoration: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
-  }
+}
 
-  .nav-button:hover {
+.nav-button:hover {
     background-color: #ddd;
-  }
+}
 
 
-  .top-controls {
+.top-controls {
     width: 95%;
     display: flex;
     justify-content: flex-end;
     padding: 20px;
-  }
+}
 
-    .add-button {
-      display: flex;
-      padding: 10px 18px;
-      font-size: 22px;
-      font-weight: bold;
-      border-radius: 30%;
-      border: none;
-      background-color: #531c1c;
-      color: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      cursor: pointer;
-      text-decoration: none;
-      text-align:center;
-      justify-content:center;
-      align-items:center;
-    }
+.add-button {
+    display: flex;
+    padding: 10px 18px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 30%;
+    border: none;
+    background-color: #531c1c;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 
-    .add-button:hover {
-      background-color: #EA6463;
-    }
+.add-button:hover {
+    background-color: #EA6463;
+}
 
-  .brands-container {
+.brands-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
@@ -121,13 +121,13 @@
     max-width: 1200px;
     justify-content: center;
     padding: 20px;
-  }
+}
 
 
-  .brand-card {
+.brand-card {
     background-color: #eee;
     border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -140,28 +140,28 @@
     color: white;
     height: 300px;
 
-  }
+}
 
 
-  .card-header {
+.card-header {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: start;
     position: relative;
-  }
+}
 
 
-  .product-image {
+.product-image {
     width: 50px;
     height: 100px;
     object-fit: contain;
     justify-content: center;
     align-items: center;
-  }
+}
 
 
-  .delete-button {
+.delete-button {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -173,47 +173,46 @@
     border-radius: 50%;
     font-size: 1.2rem;
     cursor: pointer;
-  }
+}
 
-  .delete-button:hover {
+.delete-button:hover {
     background-color: darkred;
-  }
+}
 
 
-  .brand-info {
+.brand-info {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
     border-radius: 10px;
     text-align: center;
-  }
+}
 
 
-  .product-name {
+.product-name {
     font-size: 1.1em;
     font-weight: bold;
     text-align: center;
     margin-bottom: 5px;
-  }
+}
 
 
-  .price-add-row {
+.price-add-row {
 
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 
-  }
+}
 
-
-  .product-price {
+.product-price {
     font-size: 1em;
     font-weight: bold;
     color: white;
-  }
+}
 
 
-  .add-or-edit-button {
+.add-or-edit-button {
     background-color: #531c1c;
     color: white;
     border: none;
@@ -222,17 +221,17 @@
     font-size: 0.9em;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
 
-  .add-or-edit-button:hover {
+.add-or-edit-button:hover {
     background-color: #7b2929;
-  }
+}
 
-  p {
+p {
     color: black;
     line-height: 50px;
     font-size: 20px;
     font-weight: 400;
     text-align: center;
-  }
+}
   

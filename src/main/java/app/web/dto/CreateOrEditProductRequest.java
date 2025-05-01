@@ -2,6 +2,7 @@ package app.web.dto;
 
 import app.product.model.ProductCategory;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class CreateProductRequest {
+public class CreateOrEditProductRequest {
 
     @Size(min = 1, max = 30, message = "Product name must be at least 1 symbol.")
     private String name;
@@ -26,7 +27,7 @@ public class CreateProductRequest {
     private ProductCategory category;
 
     @Positive(message = "Price must be positive.")
-    @NotBlank(message = "Please enter a price.")
+    @NotNull(message = "Please enter a price.")
     private BigDecimal price;
 
     @URL(message = "Please enter a valid URL format.")

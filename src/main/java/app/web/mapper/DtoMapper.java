@@ -1,6 +1,8 @@
 package app.web.mapper;
 
+import app.product.model.Product;
 import app.user.model.User;
+import app.web.dto.CreateOrEditProductRequest;
 import app.web.dto.EditProfileRequest;
 import lombok.experimental.UtilityClass;
 
@@ -14,6 +16,16 @@ public class DtoMapper {
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .username(user.getUsername())
+                .build();
+    }
+
+    public CreateOrEditProductRequest mapToCreateOrEditProductRequest(Product product) {
+
+        return CreateOrEditProductRequest.builder()
+                .name(product.getName())
+                .price(product.getPrice())
+                .category(product.getCategory())
+                .imageUrl(product.getImageUrl())
                 .build();
     }
 }
