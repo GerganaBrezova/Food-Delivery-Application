@@ -35,7 +35,10 @@
         </nav>
     </div>
 </header>
-
+`
+<div class="top-controls" th:if="${user.role.name() == 'EMPLOYEE'}">
+    <a th:href="@{/company/add}" class="add-button">+</a>
+</div>
 
 <main class="brands-container">
 
