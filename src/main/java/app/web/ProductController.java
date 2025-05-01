@@ -7,13 +7,13 @@ import app.user.model.User;
 import app.user.service.UserService;
 import app.web.dto.CreateOrEditProductRequest;
 import app.web.mapper.DtoMapper;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -60,6 +60,24 @@ public class ProductController {
         modelAndView.addObject("createOrEditProductRequest", new CreateOrEditProductRequest());
 
         return modelAndView;
+    }
+
+    @PostMapping("/add")
+    public ModelAndView addNewProduct(@AuthenticationPrincipal UserAuthDetails userAuthDetails,
+                                      @Valid CreateOrEditProductRequest createOrEditProductRequest,
+                                      BindingResult bindingResult) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+
+        if (bindingResult.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView("product-creation");
+            modelAndView.addObject("user", user);
+            return modelAndView;
+        }
+
+        productService.addNewProduct(createOrEditProductRequest);
+
+        return new ModelAndView("redirect:/home");
     }
 
     @GetMapping("/{id}/edit")

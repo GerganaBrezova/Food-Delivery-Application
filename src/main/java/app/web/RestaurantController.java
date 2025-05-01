@@ -1,12 +1,18 @@
 package app.web;
 
 import app.product.model.ProductCategory;
+import app.restaurant.model.Restaurant;
+import app.restaurant.service.RestaurantService;
 import app.security.UserAuthDetails;
 import app.user.model.User;
 import app.user.service.UserService;
+import app.web.dto.CreateOrEditProductRequest;
+import app.web.dto.CreateRestaurantRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,10 +26,12 @@ import java.util.UUID;
 public class RestaurantController {
 
     private final UserService userService;
+    private final RestaurantService restaurantService;
 
     @Autowired
-    public RestaurantController(UserService userService) {
+    public RestaurantController(UserService userService, RestaurantService restaurantService) {
         this.userService = userService;
+        this.restaurantService = restaurantService;
     }
 
     @GetMapping("/categories/{brandId}/location/{location}")
@@ -41,5 +49,36 @@ public class RestaurantController {
         modelAndView.addObject("user", user);
 
         return modelAndView;
+    }
+
+    @GetMapping("/add")
+    public ModelAndView getRestaurantCreationPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("restaurant-creation");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("createRestaurantRequest", new CreateRestaurantRequest());
+
+        return modelAndView;
+    }
+
+    @PostMapping("/add")
+    public ModelAndView addNewRestaurant(@AuthenticationPrincipal UserAuthDetails userAuthDetails,
+                                      @Valid CreateRestaurantRequest createRestaurantRequest,
+                                      BindingResult bindingResult) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+
+        if (bindingResult.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView("restaurant-creation");
+            modelAndView.addObject("user", user);
+            return modelAndView;
+        }
+
+        restaurantService.addNewRestaurant(createRestaurantRequest);
+
+        return new ModelAndView("redirect:/home");
     }
 }

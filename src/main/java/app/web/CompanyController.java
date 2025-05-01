@@ -42,7 +42,7 @@ public class CompanyController {
     }
 
     @PostMapping("/add")
-    public ModelAndView addNewRestaurant(@AuthenticationPrincipal UserAuthDetails userAuthDetails, @Valid CreateCompanyRequest createCompanyRequest, BindingResult bindingResult) {
+    public ModelAndView addNewCompany(@AuthenticationPrincipal UserAuthDetails userAuthDetails, @Valid CreateCompanyRequest createCompanyRequest, BindingResult bindingResult) {
 
         User user = userService.getUserById(userAuthDetails.getId());
 

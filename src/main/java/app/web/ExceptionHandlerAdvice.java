@@ -17,6 +17,28 @@ import java.nio.file.AccessDeniedException;
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
 
+    @ExceptionHandler(CompanyNotFound.class)
+    public String handleCompanyNotFound(RedirectAttributes redirectAttributes,
+                                        CompanyNotFound companyNotFound,
+                                        HttpServletRequest request){
+
+        String message = companyNotFound.getMessage();
+        redirectAttributes.addFlashAttribute("noCompanyFoundMessage", message);
+
+        String referer = request.getHeader("Referer");
+
+        return (referer != null && referer.contains("/restaurant/add")) ? "redirect:/restaurant/add" : "redirect:/products/add";
+    }
+
+    @ExceptionHandler(RestaurantNotFound.class)
+    public String handleRestaurantNotFound(RedirectAttributes redirectAttributes, RestaurantNotFound restaurantNotFound) {
+
+        String message = restaurantNotFound.getMessage();
+        redirectAttributes.addFlashAttribute("noRestaurantFoundMessage", message);
+
+        return "redirect:/products/add";
+    }
+
     @ExceptionHandler(NoAddressSelected.class)
     public String handleNoAddressSelected(RedirectAttributes redirectAttributes, NoAddressSelected noAddressSelected) {
 

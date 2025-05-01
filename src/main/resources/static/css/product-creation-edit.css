@@ -161,3 +161,11 @@ body {
 .remove-btn:hover {
     background-color: #c9302c;
 }
+
+small {
+    display: block;
+    color: rgb(217, 29, 29);
+    text-align: center;
+    margin-top: 5px;
+    font-size: 0.85em;
+}

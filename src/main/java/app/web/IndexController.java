@@ -2,6 +2,7 @@ package app.web;
 
 import app.company.model.Company;
 import app.company.service.CompanyService;
+import app.restaurant.model.Restaurant;
 import app.security.UserAuthDetails;
 import app.user.model.User;
 import app.user.service.UserService;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class IndexController {
@@ -78,11 +81,13 @@ public class IndexController {
 
         User user = userService.getUserById(userAuthDetails.getId());
         List<Company> allCompanies = companyService.getAllCompanies();
+        Map<UUID, List<Restaurant>> restaurantsByCompany = companyService.getRestaurantsGroupedByCompany();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home");
         modelAndView.addObject("user", user);
         modelAndView.addObject("allCompanies", allCompanies);
+        modelAndView.addObject("restaurantsByCompany", restaurantsByCompany);
 
         return modelAndView;
     }

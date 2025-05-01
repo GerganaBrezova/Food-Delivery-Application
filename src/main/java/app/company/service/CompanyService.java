@@ -8,7 +8,9 @@ import app.web.dto.CreateCompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -61,5 +63,20 @@ public class CompanyService {
         restaurants.forEach(r -> r.setCompany(company));
 
         companyRepository.save(company);
+    }
+
+    public Company getCompanyByName(String brandName) {
+        return companyRepository.getCompanyByName(brandName).orElseThrow(() -> new CompanyNotFound("Brand %s not found.".formatted(brandName)));
+    }
+
+    public Map<UUID, List<Restaurant>> getRestaurantsGroupedByCompany() {
+        List<Company> companies = getAllCompanies();
+        Map<UUID, List<Restaurant>> restaurantsByCompany = new HashMap<>();
+
+        for (Company company : companies) {
+            restaurantsByCompany.put(company.getId(), company.getRestaurants());
+        }
+
+        return restaurantsByCompany;
     }
 }

@@ -30,7 +30,7 @@ public class Restaurant {
     @Column(nullable = false)
     private String address;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Product> products = new ArrayList<>();
 
     @ManyToOne

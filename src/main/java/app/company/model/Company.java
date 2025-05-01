@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
@@ -32,5 +33,5 @@ public class Company {
     private String logoUrl;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
-    private List<Restaurant> restaurants;
+    private List<Restaurant> restaurants = new ArrayList<>();
 }

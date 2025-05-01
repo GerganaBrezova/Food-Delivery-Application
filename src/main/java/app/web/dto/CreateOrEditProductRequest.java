@@ -11,7 +11,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
 
+
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -23,7 +25,7 @@ public class CreateOrEditProductRequest {
     @Size(min = 1, max = 30, message = "Product name must be at least 1 symbol.")
     private String name;
 
-    @NotBlank(message = "Please select category.")
+    @NotNull(message = "Category must be selected")
     private ProductCategory category;
 
     @Positive(message = "Price must be positive.")
@@ -33,4 +35,10 @@ public class CreateOrEditProductRequest {
     @URL(message = "Please enter a valid URL format.")
     @NotBlank(message = "Image URL can not be empty.")
     private String imageUrl;
+
+    @NotBlank(message = "Please enter a brand name.")
+    private String brandName;
+
+    @NotBlank(message = "Please enter restaurant address.")
+    private String restaurantAddress;
 }

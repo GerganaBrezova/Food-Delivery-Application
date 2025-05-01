@@ -17,21 +17,21 @@
     <div class="header-content">
         <h1 class="welcome-title">Welcome to Our Page!</h1>
         <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <nav class="header-nav">
-                <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-                <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-shopping-basket"></i> Basket</a>
-                <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
-                    <i class="fas fa-chart-bar"></i>
-                    Statistics
-                </a>
-                <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
-                <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
-            </nav>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <nav class="header-nav">
+            <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
+            <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a href="#" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
+                <i class="fas fa-chart-bar"></i>
+                Statistics
+            </a>
+            <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
+            <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+        </nav>
     </div>
 
 </header>
@@ -61,6 +61,16 @@
                 <option th:each="category : ${T(app.product.model.ProductCategory).values()}" th:value="${category}" th:text="${#strings.capitalize(#strings.toLowerCase(category))}"></option>
             </select>
             <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></small>
+
+            <label for="brand-name">Brand name:</label>
+            <input type="text" id="brand-name" placeholder="Enter brand name" th:field="*{brandName}">
+            <small th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"></small>
+            <small th:text="${noCompanyFoundMessage}"></small>
+
+            <label for="restaurant-address">Restaurant address:</label>
+            <input type="text" id="restaurant-address" placeholder="Enter restaurant address" th:field="*{restaurantAddress}">
+            <small th:if="${#fields.hasErrors('restaurantAddress')}" th:errors="*{restaurantAddress}"></small>
+            <small th:text="${noRestaurantFoundMessage}"></small>
 
         </div>
 

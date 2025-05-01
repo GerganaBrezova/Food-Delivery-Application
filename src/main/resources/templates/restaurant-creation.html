@@ -38,39 +38,24 @@
 
 <main class="add-brand-form">
 
-    <h1>Add a new product</h1>
+    <h1>Add a new restaurant</h1>
 
-    <form th:action="@{/products/add}" th:method="POST" th:object="${createOrEditProductRequest}">
+    <form th:action="@{/restaurant/add}" th:method="POST" th:object="${createRestaurantRequest}">
 
         <div class="product-info">
-
-            <label for="image-url">Image:</label>
-            <input type="text" id="image-url" placeholder="Enter image URL" th:field="*{imageUrl}">
-            <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"></small>
 
             <label for="name">Name:</label>
             <input type="text" id="name" placeholder="Enter name" th:field="*{name}">
             <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
 
-            <label for="price">Price:</label>
-            <input type="number" id="price" placeholder="Enter price" step="0.1" th:field="*{price}">
-            <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></small>
-
-            <label for="category">Category:</label>
-            <select id="category" th:field="*{category}">
-                <option th:each="category : ${T(app.product.model.ProductCategory).values()}" th:value="${category}" th:text="${#strings.capitalize(#strings.toLowerCase(category))}"></option>
-            </select>
-            <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></small>
+            <label for="address">Restaurant address:</label>
+            <input type="text" id="address" placeholder="Enter address" th:field="*{address}">
+            <small th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></small>
 
             <label for="brand-name">Brand name:</label>
             <input type="text" id="brand-name" placeholder="Enter brand name" th:field="*{brandName}">
             <small th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"></small>
             <small th:text="${noCompanyFoundMessage}"></small>
-
-            <label for="restaurant-address">Restaurant address:</label>
-            <input type="text" id="restaurant-address" placeholder="Enter restaurant address" th:field="*{restaurantAddress}">
-            <small th:if="${#fields.hasErrors('restaurantAddress')}" th:errors="*{restaurantAddress}"></small>
-            <small th:text="${noRestaurantFoundMessage}"></small>
 
         </div>
 

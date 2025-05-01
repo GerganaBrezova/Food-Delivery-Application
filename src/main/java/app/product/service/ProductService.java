@@ -8,6 +8,10 @@ import app.product.model.Product;
 import app.product.model.ProductCategory;
 import app.product.repository.ProductRepository;
 import app.restaurant.model.Restaurant;
+import app.restaurant.service.RestaurantService;
+import app.web.dto.CreateOrEditProductRequest;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +21,20 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Slf4j
+
 @Service
 public class ProductService {
 
     private final CompanyService companyService;
     private final ProductRepository productRepository;
+    private final RestaurantService restaurantService;
 
     @Autowired
-    public ProductService(CompanyService companyService, ProductRepository productRepository) {
+    public ProductService(CompanyService companyService, ProductRepository productRepository, RestaurantService restaurantService) {
         this.companyService = companyService;
         this.productRepository = productRepository;
+        this.restaurantService = restaurantService;
     }
 
     public List<Product> generateUniqueProductsForBrand(String brandName) {
@@ -75,16 +83,21 @@ public class ProductService {
         return productRepository.findById(productId).orElseThrow(() -> new ProductNotFound("Product with id [%s] not found.".formatted(productId)));
     }
 
-//    public Product createProduct(CreateOrEditProductRequest createProductRequest) {
-//
-//        Product product = Product.builder()
-//                .name(createProductRequest.getName())
-//                .category(ProductCategory.valueOf(createProductRequest.getCategory().name()))
-//                .price(createProductRequest.getPrice())
-//                .imageUrl(createProductRequest.getImageUrl())
-//                .build();
-//
-//        return productRepository.save(product);
-//    }
+    public void addNewProduct(CreateOrEditProductRequest createOrEditProductRequest) {
+
+        Restaurant restaurant = restaurantService.getRestaurantByBrandAndLocation(createOrEditProductRequest.getBrandName(), createOrEditProductRequest.getRestaurantAddress());
+
+        Product product = Product.builder()
+                .name(createOrEditProductRequest.getName())
+                .category(createOrEditProductRequest.getCategory())
+                .price(createOrEditProductRequest.getPrice())
+                .imageUrl(createOrEditProductRequest.getImageUrl())
+                .build();
+
+        restaurant.getProducts().add(product);
+
+        productRepository.save(product);
+        restaurantService.saveRestaurant(restaurant);
+    }
 }
 
