@@ -29,6 +29,10 @@
                 <i class="fas fa-chart-bar"></i>
                 Statistics
             </a>
+            <a th:href="@{/customers}" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
+                <i class="fas fa-users"></i>
+                Customers
+            </a>
             <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
             <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
         </nav>
@@ -39,17 +43,19 @@
 <main class="courier-stats-container">
     <section class="stats-header">
         <h2>Courier Revenue Report</h2>
-        <div class="date-filters">
-            <label>
-                From:
-                <input type="date" name="start-date">
-            </label>
-            <label>
-                To:
-                <input type="date" name="end-date">
-            </label>
-            <button class="filter-button">Filter</button>
-        </div>
+
+            <form th:action="@{/company/statistics/filter}" th:method="GET" class="date-filters">
+                <label>
+                    From:
+                    <input type="datetime-local" name="from">
+                </label>
+                <label>
+                    To:
+                    <input type="datetime-local" name="to">
+                </label>
+                <button class="filter-button" type="submit">Filter</button>
+            </form>
+
     </section>
 
     <section class="stats-table-wrapper">
@@ -61,28 +67,20 @@
                 <th>Revenue (€)</th>
             </tr>
             </thead>
+
             <tbody>
-            <tr>
-                <td>John Doe</td>
-                <td>48</td>
-                <td>€1,240</td>
-            </tr>
-            <tr>
-                <td>Maria Petrova</td>
-                <td>52</td>
-                <td>€1,360</td>
-            </tr>
-            <tr>
-                <td>Ivan Dimitrov</td>
-                <td>44</td>
-                <td>€1,100</td>
+
+            <tr th:each="courier : ${allSystemCouriers}">
+                <td th:text="${courier.firstName + ' ' + courier.lastName}"></td>
+                <td th:text="${courier.getCompletedOrders().size()}"></td>
+                <td th:text="${courier.generatedTurnover}"></td>
             </tr>
 
             </tbody>
             <tfoot>
             <tr>
                 <td colspan="2" class="total-label">Total</td>
-                <td class="total-revenue">€3,700</td>
+                <td class="total-revenue" th:text="'$' + ${#numbers.formatDecimal(revenue, 1, 'COMMA', 2, 'POINT')}"></td>
             </tr>
             </tfoot>
         </table>

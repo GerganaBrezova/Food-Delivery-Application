@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="order-accepted.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+
+    <title>Order Accepted</title>
+</head>
+<body>
+<header class="main-header">
+    <div class="header-left">
+        <img src="home.jpg" alt="Logo" />
+    </div>
+    <div class="header-content">
+        <h1 class="welcome-title">Welcome to Our Page!</h1>
+        <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <nav class="header-nav">
+            <a href="#" class="nav-button"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a href="#" class="nav-button"><i class="fas fa-chart-bar"></i> Statistics</a>
+            <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+            <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+        </nav>
+    </div>
+
+</header>
+
+
+<main class="page-container">
+    <h1 class="page-title">Order Details</h1>
+
+    <div class="order-details-box">
+        <div class="order-header">
+            <span class="order-id">Order #5</span>
+            <span class="order-price">$20.56</span>
+        </div>
+
+        <div class="order-status status-pending">Status: Not Picked Up</div>
+        <div class="order-status status-picked">Status: Picked Up</div>
+
+        <div class="order-status status-delivered">Status: Delivered</div>
+
+
+        <div class="order-location">
+            <div><span class="label">🏪 From:</span> KFC, Sofia, bul. Bulgaria 12</div>
+            <div><span class="label">📍 To:</span> ul. Planinski prohod 5, Sofia</div>
+        </div>
+
+        <div class="button-wrapper">
+            <form method="post" action="/orders/pickup">
+                <input type="hidden" name="orderId" value="5" />
+                <button type="submit" class="action-button">Picked Up</button>
+            </form>
+        </div>
+
+
+        <div class="button-wrapper">
+            <form method="post" action="/orders/deliver">
+                <input type="hidden" name="orderId" value="5" />
+                <button type="submit" class="action-button">Delivered</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="no-orders-message">
+        <p>No orders have been accepted yet.</p>
+        <form action="/orders" method="get">
+            <button type="submit" class="back-to-list-button">Back to Orders List</button>
+        </form>
+    </div>
+
+</main>
+
+</body>

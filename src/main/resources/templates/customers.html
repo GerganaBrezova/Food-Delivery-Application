@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/categories.css"/>
+    <link rel="stylesheet" href="/css/customers.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 
-    <title>Categories</title>
+    <title>Home page</title>
 </head>
 <body>
 <header class="main-header">
@@ -25,7 +25,8 @@
         <br>
         <nav class="header-nav">
             <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-            <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i
+                    class="fas fa-shopping-basket"></i> Basket</a>
             <a th:href="@{/company/statistics}" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
                 <i class="fas fa-chart-bar"></i>
                 Statistics
@@ -34,23 +35,34 @@
                 <i class="fas fa-users"></i>
                 Customers
             </a>
-            <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
-            <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+            <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i
+                    class="fas fa-receipt"></i> Orders</a>
+            <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i>
+                Profile</a>
         </nav>
     </div>
 </header>
 
-<main class="categories-container">
-    <a th:each="category : ${categories}"
-       th:href="@{/products(brandId=${brandId}, location=${location}, categoryName=${category.name()})}"
-       class="category-link">
-        <div class="category-card"
-             th:style="'background-image: url(/images/' + ${category.name().toLowerCase()} + '.jpg)'">
-            <h2 class="category-title" th:text="${category.name()}"></h2>
-        </div>
-    </a>
-</main>
+<table>
+    <thead>
+    <tr>
+        <th>Customer Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${allSystemCustomers}">
+        <td th:text="${customer.firstName + ' ' + customer.lastName}"></td>
+        <td>
+            <form th:action="@{'/customers/' + ${customer.id} + '/promote'}" th:method="POST">
+                <button type="submit" class="promote-btn">Promote to Courier</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
+
 
 </html>

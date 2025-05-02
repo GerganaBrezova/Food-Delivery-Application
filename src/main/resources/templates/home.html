@@ -30,6 +30,10 @@
                 <i class="fas fa-chart-bar"></i>
                 Statistics
             </a>
+            <a th:href="@{/customers}" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
+                <i class="fas fa-users"></i>
+                Customers
+            </a>
             <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
             <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
         </nav>

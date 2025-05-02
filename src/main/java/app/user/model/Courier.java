@@ -26,7 +26,7 @@ public class Courier extends User {
     private LocalDateTime hiredOn;
 
     @OneToMany(mappedBy = "courier", fetch = FetchType.EAGER)
-    private List<Order> acceptedOrders = new ArrayList<>();
+    private List<Order> completedOrders = new ArrayList<>();
 
     @ManyToOne
     private Employee hiredBy;

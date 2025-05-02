@@ -198,7 +198,7 @@ h1 {
 .stats {
     display: flex;
     justify-content: center;
-    gap: 300px;
+    gap: 200px;
     margin-bottom: 20px;
 }
 

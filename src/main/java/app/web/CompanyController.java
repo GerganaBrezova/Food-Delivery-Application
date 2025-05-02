@@ -3,6 +3,7 @@ package app.web;
 import app.company.model.Company;
 import app.company.service.CompanyService;
 import app.security.UserAuthDetails;
+import app.user.model.Courier;
 import app.user.model.User;
 import app.user.service.UserService;
 import app.web.dto.CreateCompanyRequest;
@@ -14,6 +15,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -72,12 +76,41 @@ public class CompanyController {
     public ModelAndView getCompanyStatisticsPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
+        List<Courier> allSystemCouriers = userService.getAllCouriers();
+        BigDecimal revenue = userService.getRevenueFromCouriers(allSystemCouriers);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("statistics");
         modelAndView.addObject("user", user);
+        modelAndView.addObject("allSystemCouriers", allSystemCouriers);
+        modelAndView.addObject("revenue", revenue);
 
         return modelAndView;
     }
+
+    @GetMapping("/statistics/filter")
+    public ModelAndView getFilteredStatisticsPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails,
+                                                  @RequestParam(required = false) LocalDateTime from,
+                                                  @RequestParam(required = false) LocalDateTime to) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+
+        List<Courier> filteredCouriers = (from != null && to != null)
+                ? userService.getCouriersByOrderCompletionDate(from, to)
+                : userService.getAllCouriers();
+
+        BigDecimal totalRevenue = filteredCouriers.stream()
+                .map(Courier::getGeneratedTurnover)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("statistics");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("allSystemCouriers", filteredCouriers);
+        modelAndView.addObject("revenue", totalRevenue);
+
+        return modelAndView;
+    }
+
 
 }
