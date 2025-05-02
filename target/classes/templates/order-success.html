@@ -3,42 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/order-success.css" />
+  <link rel="stylesheet" href="/css/order-success.css"/>
+  <link rel="stylesheet" href="/css/nav-bar.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-
   <title>Order Successful</title>
 </head>
 <body>
-<header class="main-header">
-  <div class="header-left">
-    <img src="/images/home.jpg" alt="Logo" />
-  </div>
-  <div class="header-content">
-    <h1 class="welcome-title">Welcome to Our Page!</h1>
-    <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <nav class="header-nav">
-      <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-      <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-shopping-basket"></i> Basket</a>
-      <a th:href="@{/company/statistics}" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
-        <i class="fas fa-chart-bar"></i>
-        Statistics
-      </a>
-      <a th:href="@{/customers}" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
-        <i class="fas fa-users"></i>
-        Customers
-      </a>
-      <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
-      <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
-    </nav>
-  </div>
 
-</header>
+<th:block th:insert="fragments/nav-bar :: main-header(${user})"></th:block>
 
 <main class="order-success-page">
   <div class="success-container">

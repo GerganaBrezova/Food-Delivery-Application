@@ -1,94 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .welcome-title {
-    font-size: 2em;
-    color: #eae8e8;
-    text-align: left;
-    font-weight: bold;
-    margin-bottom: 20px;
-
-}
-
-.welcome-text {
-    font-size: 1em;
-    color: #eae8e8;
-    text-align: left;
-    font-weight: bold;
-    margin-bottom: 20px;
-
-}
-
-  .main-header {
-    width: 100%;
-    display: flex;
-    background: #531c1c;
-    padding: 0px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    flex-wrap: wrap;
-    border-radius: 15px;
-    overflow: hidden;
-  }
-
-  .header-left{
-    margin: 0;
-    padding: 0;
-
-  }
-
-  .header-left img {
-    width: 450px;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    margin: 0;
-
-  }
-
-
-.header-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  flex-grow: 1;
-}
-
-
-  .header-nav {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: left;
-
-  }
-
-  .nav-button {
-    padding: 10px 20px;
-    border-radius: 20px;
-    background-color: #f0f0f0;
-    color: #333;
-    text-decoration: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .nav-button:hover {
-    background-color: #ddd;
-  }
-
-  .page-container {
+.page-container {
     background-color: #ffffff;
     max-width: 1200px;
     width: 70%;
@@ -96,61 +6,61 @@
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .page-title {
+.page-title {
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 30px;
     color: #333;
     text-align: center;
-  }
+}
 
-  .orders-list {
+.orders-list {
     width: 90%;
     max-width: 800px;
     margin: 40px auto;
     font-family: sans-serif;
-  }
+}
 
-  .order-item {
+.order-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
     padding: 15px 0;
-  }
+}
 
-  .order-header {
+.order-header {
     flex: 1 1 100%;
     display: flex;
     justify-content: space-between;
     font-weight: bold;
     font-size: 1.1rem;
-  }
+}
 
-  .order-details {
+.order-details {
     flex: 1 1 70%;
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-top: 5px;
-  }
+}
 
-  .label {
+.label {
     font-weight: 600;
     margin-right: 4px;
-  }
+}
 
-  .accept-form {
+.accept-form {
     flex: 1 1 25%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-  }
+}
 
-  .accept-button {
+.accept-button {
     padding: 8px 16px;
     background-color: #2e7d32;
     color: white;
@@ -160,14 +70,14 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.2s ease;
-  }
+}
 
-  .accept-button:hover {
+.accept-button:hover {
     background-color: #1b5e20;
-  }
+}
 
-  .order-divider {
+.order-divider {
     border: none;
     border-top: 1px solid #ccc;
     margin: 0;
-  }
+}
