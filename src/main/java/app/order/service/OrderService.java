@@ -108,4 +108,10 @@ public class OrderService {
     public void saveAll(List<Order> orders) {
         orderRepository.saveAll(orders);
     }
+
+    public List<Order> getAllWaitingOrders() {
+        return orderRepository.findAll().stream()
+                .filter(order -> order.getStatus().name().equals("CREATED"))
+                .collect(Collectors.toList());
+    }
 }

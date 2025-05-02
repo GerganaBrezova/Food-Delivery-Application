@@ -18,60 +18,30 @@
     <div class="orders-list">
 
 
-        <div class="order-item">
+        <div class="order-item" th:each="order : ${allWaitingOrders}">
             <div class="order-header">
                 <span class="order-number">#1</span>
-                <span class="order-price">$20.56</span>
+                <span class="order-price" th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></span>
             </div>
 
             <div class="order-details">
-                <div><span class="label">🏪 From:</span> KFC, Sofia</div>
-                <div><span class="label">📍 To:</span> ul. Planinski prohod 5</div>
+                <div>
+                    <span class="label">🏪 From:</span>
+                    <span>KFC, Sofia</span>
+                </div>
+                <div>
+                    <span class="label">📍 To:</span>
+                    <span th:text="${order.address}"></span>
+                </div>
             </div>
 
             <form method="post" action="/orders/accept" class="accept-form">
                 <input type="hidden" name="orderId" value="1" />
                 <button type="submit" class="accept-button">Accept</button>
             </form>
+
         </div>
-        <hr class="order-divider" />
-
-        <div class="order-item">
-            <div class="order-header">
-                <span class="order-number">#1</span>
-                <span class="order-price">$20.56</span>
-            </div>
-
-            <div class="order-details">
-                <div><span class="label">🏪 From:</span> KFC, Sofia</div>
-                <div><span class="label">📍 To:</span> ul. Planinski prohod 5</div>
-            </div>
-
-            <form method="post" action="/orders/accept" class="accept-form">
-                <input type="hidden" name="orderId" value="1" />
-                <button type="submit" class="accept-button">Accept</button>
-            </form>
-        </div>
-        <hr class="order-divider" />
-
-        <div class="order-item">
-            <div class="order-header">
-                <span class="order-number">#1</span>
-                <span class="order-price">$20.56</span>
-            </div>
-
-            <div class="order-details">
-                <div><span class="label">🏪 From:</span> KFC, Sofia</div>
-                <div><span class="label">📍 To:</span> ul. Planinski prohod 5</div>
-            </div>
-
-            <form method="post" action="/orders/accept" class="accept-form">
-                <input type="hidden" name="orderId" value="1" />
-                <button type="submit" class="accept-button">Accept</button>
-            </form>
-        </div>
-        <hr class="order-divider" />
-
+        <hr class="order-divider"/>
 
     </div>
 </main>

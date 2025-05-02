@@ -119,11 +119,15 @@ public class OrderController {
     public ModelAndView getAwaitingOrdersPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
+        List<Order> allWaitingOrders = orderService.getAllWaitingOrders();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("orders-list");
         modelAndView.addObject("user", user);
+        modelAndView.addObject("allWaitingOrders", allWaitingOrders);
 
         return modelAndView;
     }
+
+
 }
