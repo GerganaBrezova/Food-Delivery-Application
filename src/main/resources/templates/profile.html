@@ -53,7 +53,7 @@
     </form>
 
     <div class="faq-section">
-        <h2>Frequently Asked Questions</h2>
+        <h2 th:if="${user.role.name() != 'EMPLOYEE'}">Frequently Asked Questions</h2>
 
         <div th:if="${user.role.name() == 'CUSTOMER'}">
 
