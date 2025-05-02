@@ -114,4 +114,16 @@ public class OrderController {
 
         return "redirect:/orders/success";
     }
+
+    @GetMapping("/awaiting")
+    public ModelAndView getAwaitingOrdersPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        User user = userService.getUserById(userAuthDetails.getId());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("orders-list");
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
 }
