@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="orders-list.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+
+    <title>Product Creation</title>
+</head>
+<body>
+<header class="main-header">
+    <div class="header-left">
+        <img src="home.jpg" alt="Logo" />
+    </div>
+    <div class="header-content">
+        <h1 class="welcome-title">Welcome to Our Page!</h1>
+        <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <nav class="header-nav">
+            <a href="#" class="nav-button"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a href="#" class="nav-button"><i class="fas fa-chart-bar"></i> Statistics</a>
+            <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
+            <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+        </nav>
+    </div>
+
+</header>
+
+
+<main class="page-container">
+    <h1 class="page-title">Available Orders</h1>
+
+    <div class="orders-list">
+
+
+        <div class="order-item">
+            <div class="order-header">
+                <span class="order-number">#1</span>
+                <span class="order-price">$20.56</span>
+            </div>
+
+            <div class="order-details">
+                <div><span class="label">🏪 From:</span> KFC, Sofia</div>
+                <div><span class="label">📍 To:</span> ul. Planinski prohod 5</div>
+            </div>
+
+            <form method="post" action="/orders/accept" class="accept-form">
+                <input type="hidden" name="orderId" value="1" />
+                <button type="submit" class="accept-button">Accept</button>
+            </form>
+        </div>
+        <hr class="order-divider" />
+
+        <div class="order-item">
+            <div class="order-header">
+                <span class="order-number">#1</span>
+                <span class="order-price">$20.56</span>
+            </div>
+
+            <div class="order-details">
+                <div><span class="label">🏪 From:</span> KFC, Sofia</div>
+                <div><span class="label">📍 To:</span> ul. Planinski prohod 5</div>
+            </div>
+
+            <form method="post" action="/orders/accept" class="accept-form">
+                <input type="hidden" name="orderId" value="1" />
+                <button type="submit" class="accept-button">Accept</button>
+            </form>
+        </div>
+        <hr class="order-divider" />
+
+        <div class="order-item">
+            <div class="order-header">
+                <span class="order-number">#1</span>
+                <span class="order-price">$20.56</span>
+            </div>
+
+            <div class="order-details">
+                <div><span class="label">🏪 From:</span> KFC, Sofia</div>
+                <div><span class="label">📍 To:</span> ul. Planinski prohod 5</div>
+            </div>
+
+            <form method="post" action="/orders/accept" class="accept-form">
+                <input type="hidden" name="orderId" value="1" />
+                <button type="submit" class="accept-button">Accept</button>
+            </form>
+        </div>
+        <hr class="order-divider" />
+
+
+    </div>
+</main>
+</body>
