@@ -17,9 +17,9 @@
     <br>
     <h1>Order Tracking & History</h1>
 
-    <p class="no-orders" th:if="${user.role.name() == 'CUSTOMER' and #lists.isEmpty(userOrders)}">You still do not have any orders!</p>
+    <p class="no-orders" th:if="${#lists.isEmpty(userOrders)}">You still do not have any orders!</p>
 
-    <section class="order-tracking" th:if="${user.role.name() == 'CUSTOMER' and not #lists.isEmpty(userOrders)}">
+    <section class="order-tracking" th:if="${#lists.isEmpty(userOrders) == false}">
 
         <h2>Track Your Orders</h2>
         <br>
@@ -60,7 +60,7 @@
         </div>
     </section>
 
-    <section class="order-history" th:if="${user.role.name() == 'CUSTOMER' and not #lists.isEmpty(userOrders)}">
+    <section class="order-history" th:if="${#lists.isEmpty(userOrders) == false}">
         <h2>Orders History</h2>
         <table>
             <thead>
@@ -85,56 +85,6 @@
         </table>
     </section>
 
-    <div class="delivery-info" th:if="${user.role.name() == 'COURIER'}">
-        <h1>Delivery Info</h1>
-
-        <div class="stats">
-            <div class="stat">
-                <h3>124</h3>
-                <p>Orders Completed</p>
-            </div>
-
-            <div class="stat">
-                <h3>$150</h3>
-                <p>Earnings from Orders</p>
-            </div>
-
-            <div class="stat">
-                <h3>$150</h3>
-                <p>Bonus</p>
-            </div>
-        </div>
-
-        <br>
-        <div class="order-history">
-            <h2>Order History</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                    <th>Number of Products</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>#12345</td>
-                    <td>2025-04-26</td>
-                    <td>$25</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>#12346</td>
-                    <td>2025-04-25</td>
-                    <td>$45</td>
-                    <td>5</td>
-                </tr>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
 </main>
 
 </body>
