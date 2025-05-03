@@ -6,7 +6,6 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: sans-serif;
-
 }
 
 
@@ -124,4 +123,21 @@
 
 .back-to-list-button:hover {
     background-color: #EA6463;
+}
+
+.clean-button {
+    display: block;
+    padding: 10px;
+    background-color: #531c1c;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 20px auto 0 auto;
+    text-decoration: none;
+}
+
+.clean-button:hover {
+    background-color: #7a2e2e;
 }

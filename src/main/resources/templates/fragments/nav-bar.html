@@ -21,10 +21,10 @@
         <br>
         <br>
         <br>
-        <h2 class="welcome-text">
-            It’s time to power up your day with flavor and focus. <br>Grab your coffee (or pizza?) and let’s get things rolling.
+        <h2 class="welcome-text"
+            th:utext="${user.role != 'COURIER' ? 'It’s time to power up your day with flavor and focus.<br>Grab your coffee (or pizza?) and let’s get things rolling.'
+            : 'Fuel up and hit the road—deliveries await! 🚚<br>Let’s move fast, stay sharp, and make every stop count.'}">
         </h2>
-        <br>
         <br>
         <br>
         <nav class="header-nav">
@@ -41,6 +41,14 @@
             <a th:href="@{/orders/awaiting}" class="nav-button" th:if="${user.role.name() == 'COURIER'}">
                 <i class="fas fa-receipt"></i>
                 Awaiting Orders
+            </a>
+            <a th:href="@{/orders/details}" class="nav-button" th:if="${user.role.name() == 'COURIER'}">
+                <i class="fa-solid fa-truck"></i>
+                Your Order
+            </a>
+            <a th:href="@{/orders/courier}" class="nav-button" th:if="${user.role.name() == 'COURIER'}">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                History
             </a>
             <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
             <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>

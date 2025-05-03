@@ -25,7 +25,12 @@ public class Courier extends User {
     @Column(nullable = false)
     private LocalDateTime hiredOn;
 
-    @OneToMany(mappedBy = "courier", fetch = FetchType.EAGER)
+    private BigDecimal bonuses;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "responsibleCourier")
+    private Order acceptedOrder;
+
+    @OneToMany(mappedBy = "deliveredBy", fetch = FetchType.EAGER)
     private List<Order> completedOrders = new ArrayList<>();
 
     @ManyToOne

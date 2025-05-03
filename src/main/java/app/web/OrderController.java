@@ -5,6 +5,7 @@ import app.order.service.OrderService;
 import app.product.model.Product;
 import app.product.service.ProductService;
 import app.security.UserAuthDetails;
+import app.user.model.Courier;
 import app.user.model.User;
 import app.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,20 @@ public class OrderController {
         modelAndView.setViewName("orders");
         modelAndView.addObject("user", user);
         modelAndView.addObject("userOrders", userOrders);
+
+        return modelAndView;
+    }
+
+    @GetMapping("/courier")
+    public ModelAndView getCourierOrdersPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        Courier user = (Courier) userService.getUserById(userAuthDetails.getId());
+        List<Order> completedOrders = user.getCompletedOrders();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("courier-completed-orders");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("completedOrders", completedOrders);
 
         return modelAndView;
     }
@@ -129,5 +144,59 @@ public class OrderController {
         return modelAndView;
     }
 
+    @PutMapping("/{orderId}/accept")
+    public ModelAndView acceptOrder(@AuthenticationPrincipal UserAuthDetails userAuthDetails, @PathVariable UUID orderId) {
+
+        Courier courier = (Courier) userService.getUserById(userAuthDetails.getId());
+        Order order = orderService.getOrderById(orderId);
+
+        orderService.acceptOrder(order, courier);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("orders-list");
+        modelAndView.addObject("order", order);
+
+        return modelAndView;
+    }
+
+    @GetMapping("/details")
+    public ModelAndView getOrderDetailsPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        Courier user = (Courier) userService.getUserById(userAuthDetails.getId());
+        Order order = user.getAcceptedOrder();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("order-accepted");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("order", order);
+
+        return modelAndView;
+    }
+
+    @PutMapping("/change-status")
+    public ModelAndView changeOrderStatus(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        Courier user = (Courier) userService.getUserById(userAuthDetails.getId());
+        Order order = user.getAcceptedOrder();
+
+        orderService.changeOrderStatus(order, user);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("order-accepted");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("order", order);
+
+        return modelAndView;
+    }
+
+    @DeleteMapping("/clean")
+    public String cleanOrder(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
+
+        Courier user = (Courier) userService.getUserById(userAuthDetails.getId());
+
+        orderService.deleteCourierAcceptedOrder(user);
+
+        return "redirect:/orders/details";
+    }
 
 }

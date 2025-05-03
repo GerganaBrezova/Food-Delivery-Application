@@ -1,0 +1,188 @@
+.top-controls {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.orders-page {
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tracking-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.tracking-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.step.completed .circle {
+    background-color: #4CAF50;
+}
+
+.line {
+    height: 1px;
+    background-color: black;
+    flex-grow: 1;
+    margin: 0 18px;
+    position: absolute;
+    top: 18px;
+    width: calc(100% - 40px);
+    z-index: 1;
+}
+
+.line.completed {
+    background-color: #4CAF50;
+}
+
+.step p {
+    font-size: 14px;
+    color: #333;
+}
+
+.order-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.order-history th, .order-history td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.order-history th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.order-history td {
+    font-size: 16px;
+}
+
+.delivery-info {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    background-color: #f4f4f4;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.stat p {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.stat h3 {
+    font-size: 28px;
+    color: #531c1c;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.order-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.order-history th, .order-history td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.order-history th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.order-history td {
+    font-size: 16px;
+}
+
+.order-history h2 {
+    text-align: left;
+}
+
+.no-orders {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+}
+
+.order-id {
+    width: 100px;
+    min-width: 30px;
+    height: 30px;
+    padding: 0 10px;
+    background-color: #f4f4f4;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin-right: 20px;
+    margin-top: 7px;
+    white-space: nowrap;
+}
+

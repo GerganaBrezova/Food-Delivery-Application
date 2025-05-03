@@ -19,8 +19,7 @@
 
     <p class="no-orders" th:if="${user.role.name() == 'CUSTOMER' and #lists.isEmpty(userOrders)}">You still do not have any orders!</p>
 
-    <section class="order-tracking"
-             th:if="${user.role.name() == 'CUSTOMER' and not #lists.isEmpty(userOrders)}">
+    <section class="order-tracking" th:if="${user.role.name() == 'CUSTOMER' and not #lists.isEmpty(userOrders)}">
 
         <h2>Track Your Orders</h2>
         <br>
@@ -61,8 +60,6 @@
         </div>
     </section>
 
-    <br>
-    <br>
     <section class="order-history" th:if="${user.role.name() == 'CUSTOMER' and not #lists.isEmpty(userOrders)}">
         <h2>Orders History</h2>
         <table>
@@ -80,7 +77,7 @@
             <tr th:each="order : ${userOrders}">
                 <td th:text="${order.id}"></td>
                 <td th:text="${#temporals.format(order.createdOn, 'dd MMM yyyy - HH:mm')}"></td>
-                <td th:text="'$' + ${#numbers.formatDecimal(order.totalPrice.add(5), 1, 'COMMA', 2, 'POINT')}"></td>
+                <td th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></td>
                 <td th:text="${order.products.size()}"></td>
             </tr>
 

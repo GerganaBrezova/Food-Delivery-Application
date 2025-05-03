@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/orders-list.css" />
+    <link rel="stylesheet" href="/css/orders-list.css"/>
     <link rel="stylesheet" href="/css/nav-bar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <title>Orders List</title>
@@ -15,34 +15,46 @@
 <main class="page-container">
     <h1 class="page-title">Available Orders</h1>
 
-    <div class="orders-list">
+    <div class="no-orders-available" th:if="${#lists.isEmpty(allWaitingOrders)}">
+        <p>There are still no available orders! Check again later!</p>
+    </div>
 
+    <div th:if="${#lists.isEmpty(allWaitingOrders) == false}">
+        <div class="orders-list" th:each="order : ${allWaitingOrders}">
 
-        <div class="order-item" th:each="order : ${allWaitingOrders}">
-            <div class="order-header">
-                <span class="order-number">#1</span>
-                <span class="order-price" th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></span>
-            </div>
-
-            <div class="order-details">
-                <div>
-                    <span class="label">🏪 From:</span>
-                    <span>KFC, Sofia</span>
+            <div class="order-item">
+                <div class="order-header">
+                    <span class="order-number" th:text="${'#' + #strings.substring(order.id, 0, 3)} + '..'"></span>
+                    <span class="order-price"
+                          th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></span>
                 </div>
-                <div>
-                    <span class="label">📍 To:</span>
-                    <span th:text="${order.address}"></span>
+
+                <div class="order-details">
+                    <div>
+                        <span class="label">🏪 From:</span>
+                        <span>Central Pickup Point</span>
+                    </div>
+                    <div>
+                        <span class="label">📍 To:</span>
+                        <span th:text="${order.address}"></span>
+                    </div>
                 </div>
+
+                <form th:action="@{'/orders/' + ${order.id} + '/accept'}" th:method="PUT" class="accept-form">
+                    <button type="submit" class="accept-button">Accept</button>
+
+                    <div th:if="${orderAlreadyPickedUpMessage}" class="modal-overlay">
+                        <div class="modal-content">
+                            <p th:text="${orderAlreadyPickedUpMessage}"></p>
+                            <a th:href="@{/orders/awaiting}" class="close-btn">OK</a>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
-
-            <form method="post" action="/orders/accept" class="accept-form">
-                <input type="hidden" name="orderId" value="1" />
-                <button type="submit" class="accept-button">Accept</button>
-            </form>
-
+            <hr class="order-divider"/>
         </div>
-        <hr class="order-divider"/>
-
     </div>
 </main>
 </body>

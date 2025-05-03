@@ -19,7 +19,7 @@
 .orders-list {
     width: 90%;
     max-width: 800px;
-    margin: 40px auto;
+    margin: 10px auto;
     font-family: sans-serif;
 }
 
@@ -79,5 +79,50 @@
 .order-divider {
     border: none;
     border-top: 1px solid #ccc;
-    margin: 0;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: rgb(217, 29, 29);
+}
+
+.close-btn {
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    background-color: #531c1c;
+    color: #fff;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: small;
+}
+
+.close-btn:hover {
+    background-color: #7a2e2e;
+}
+
+.no-orders-available {
+    text-align: center;
+    font-size: 18px;
 }

@@ -17,6 +17,15 @@ import java.nio.file.AccessDeniedException;
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
 
+    @ExceptionHandler(OrderAlreadyPickedUp.class)
+    public String handleOrderAlreadyPickedUp(RedirectAttributes redirectAttributes, OrderAlreadyPickedUp orderAlreadyPickedUp) {
+
+        String message = orderAlreadyPickedUp.getMessage();
+        redirectAttributes.addFlashAttribute("orderAlreadyPickedUpMessage", message);
+
+        return "redirect:/orders/awaiting";
+    }
+
     @ExceptionHandler(CompanyNotFound.class)
     public String handleCompanyNotFound(RedirectAttributes redirectAttributes,
                                         CompanyNotFound companyNotFound,

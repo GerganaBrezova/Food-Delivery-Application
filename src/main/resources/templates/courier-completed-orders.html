@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/orders.css"/>
+    <link rel="stylesheet" href="/css/nav-bar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <title>Courier's Orders</title>
+</head>
+<body>
+
+<th:block th:insert="fragments/nav-bar :: main-header(${user})"></th:block>
+
+<main class="orders-page">
+
+    <br>
+    <h1>Order Tracking & History</h1>
+
+    <div class="delivery-info">
+        <h1>Delivery Info</h1>
+
+        <div class="stats">
+            <div class="stat">
+                <h3 th:text="${user.completedOrders.size()}"></h3>
+                <p>Orders Completed</p>
+            </div>
+
+            <div class="stat">
+                <h3 th:text="'$' + ${#numbers.formatDecimal(user.generatedTurnover, 1, 'COMMA', 2, 'POINT')}"></h3>
+                <p>Earnings from Orders</p>
+            </div>
+
+            <div class="stat">
+                <h3 th:text="'$' + ${#numbers.formatDecimal(user.bonuses, 1, 'COMMA', 2, 'POINT')}"></h3>
+                <p>Bonus</p>
+            </div>
+        </div>
+
+        <br>
+        <div class="order-history">
+            <h2>Order History</h2>
+
+            <p class="no-orders" th:if="${#lists.isEmpty(completedOrders)}">You still do not have any orders!</p>
+
+            <table th:if="${not #lists.isEmpty(completedOrders)}">
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Number of Products</th>
+                </tr>
+                </thead>
+                <tbody th:each="order : ${completedOrders}">
+
+                <tr>
+                    <td th:text="${'#' + #strings.substring(order.id, 0, 3)} + '..'"></td>
+                    <td th:text="${#temporals.format(order.createdOn, 'dd/MMM/yyyy HH:mm')}"></td>
+                    <td th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${order.products.size()}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+</body>

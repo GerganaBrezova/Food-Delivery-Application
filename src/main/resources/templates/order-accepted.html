@@ -10,72 +10,60 @@
 </head>
 <body>
 
-<header class="main-header">
-    <div class="header-left">
-        <img src="home.jpg" alt="Logo" />
-    </div>
-    <div class="header-content">
-        <h1 class="welcome-title">Welcome to Our Page!</h1>
-        <h2 class="welcome-text">It’s time to power up your <br>day with flavor and focus. Grab your coffee (or pizza?) and let’s get things rolling.</h2>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <nav class="header-nav">
-            <a href="#" class="nav-button"><i class="fas fa-home"></i> Home</a>
-            <a href="#" class="nav-button"><i class="fas fa-shopping-basket"></i> Basket</a>
-            <a href="#" class="nav-button"><i class="fas fa-chart-bar"></i> Statistics</a>
-            <a href="#" class="nav-button"><i class="fas fa-receipt"></i> Orders</a>
-            <a href="#" class="nav-button"><i class="fas fa-user"></i> Profile</a>
-        </nav>
-    </div>
-
-</header>
-
+<th:block th:insert="fragments/nav-bar :: main-header(${user})"></th:block>
 
 <main class="page-container">
     <h1 class="page-title">Order Details</h1>
 
-    <div class="order-details-box">
+    <div class="order-details-box" th:if="${order != null}">
         <div class="order-header">
-            <span class="order-id">Order #5</span>
-            <span class="order-price">$20.56</span>
+            <span class="order-id" th:text="${'Order #' + #strings.substring(order.id, 0, 3)} + '..'"></span>
+            <span class="order-price" th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></span>
         </div>
 
-        <div class="order-status status-pending">Status: Not Picked Up</div>
-        <div class="order-status status-picked">Status: Picked Up</div>
+        <div class="order-status status-pending" th:if="${order.status.name() == 'COURIER_FOUND'}">Status: Not Picked Up</div>
 
-        <div class="order-status status-delivered">Status: Delivered</div>
+        <div class="order-status status-picked" th:if="${order.status.name() == 'PICKED_UP'}">Status: Picked Up</div>
+
+        <div class="order-status status-delivered" th:if="${order.status.name() == 'DELIVERED'}">Status: Delivered</div>
 
 
         <div class="order-location">
-            <div><span class="label">🏪 From:</span> KFC, Sofia, bul. Bulgaria 12</div>
-            <div><span class="label">📍 To:</span> ul. Planinski prohod 5, Sofia</div>
+            <div>
+                <span class="label">🏪 From:</span>
+                <span>Central Pickup Point</span>
+            </div>
+            <div>
+                <span class="label">📍 To:</span>
+                <span th:text="${order.address}"></span>
+            </div>
         </div>
 
-        <div class="button-wrapper">
-            <form method="post" action="/orders/pickup">
-                <input type="hidden" name="orderId" value="5" />
-                <button type="submit" class="action-button">Picked Up</button>
+        <div class="button-wrapper" th:if="${order.status.name() == 'COURIER_FOUND'}">
+            <form th:action="@{/orders/change-status}" method="post">
+                <input type="hidden" name="_method" value="put"/>
+                <button type="submit" class="action-button">Pick Up</button>
             </form>
         </div>
 
-
-        <div class="button-wrapper">
-            <form method="post" action="/orders/deliver">
-                <input type="hidden" name="orderId" value="5" />
+        <div class="button-wrapper" th:if="${order.status.name() == 'PICKED_UP'}">
+            <form th:action="@{/orders/change-status}" method="post">
+                <input type="hidden" name="_method" value="put"/>
                 <button type="submit" class="action-button">Delivered</button>
             </form>
         </div>
 
+        <form th:if="${order.status.name() == 'DELIVERED'}" th:action="@{/orders/clean}" th:method="DELETE">
+            <button type="submit" class="clean-button">Clean</button>
+        </form>
+
     </div>
 
-    <div class="no-orders-message">
+    <div class="no-orders-message" th:if="${order == null}">
         <p>No orders have been accepted yet.</p>
-        <form action="/orders" method="get">
+        <a th:href="@{/orders/awaiting}">
             <button type="submit" class="back-to-list-button">Back to Orders List</button>
-        </form>
+        </a>
     </div>
 
 </main>

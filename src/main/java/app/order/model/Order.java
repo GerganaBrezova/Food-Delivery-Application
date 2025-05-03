@@ -44,8 +44,11 @@ public class Order {
     @ManyToOne
     private User customer;
 
+    @OneToOne
+    private Courier responsibleCourier;
+
     @ManyToOne
-    private Courier courier;
+    private Courier deliveredBy;
 
     @ManyToMany(fetch = FetchType.EAGER)
     List<Product> products = new ArrayList<>();

@@ -1,6 +1,7 @@
 package app.user.service;
 
 import app.exceptions.*;
+import app.order.model.Order;
 import app.security.UserAuthDetails;
 import app.user.model.*;
 import app.user.repository.CourierRepository;
@@ -134,6 +135,7 @@ public class UserService implements UserDetailsService {
                 .role(UserRole.COURIER)
                 .isActive(true)
                 .generatedTurnover(BigDecimal.ZERO)
+                .bonuses(BigDecimal.ZERO)
                 .hiredOn(LocalDateTime.now())
                 .hiredBy(employee)
                 .build();
@@ -160,5 +162,9 @@ public class UserService implements UserDetailsService {
         return allCouriers.stream().filter(courier -> courier.getCompletedOrders().stream()
                 .anyMatch(order -> !order.getCreatedOn().isBefore(from) && !order.getCreatedOn().isAfter(to)))
                 .collect(Collectors.toList());
+    }
+
+    public void saveUser(Courier courier) {
+        userRepository.save(courier);
     }
 }
