@@ -10,6 +10,7 @@ import app.web.dto.EditProductRequest;
 import app.web.mapper.DtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,7 @@ public class ProductController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('EMPLOYEE') or hasRole('CUSTOMER')")
     public ModelAndView getProductsPage(@AuthenticationPrincipal UserAuthDetails userDetails,
                                         @RequestParam(required = false) UUID brandId,
                                         @RequestParam(required = false) String location,
@@ -50,6 +52,7 @@ public class ProductController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasRole('EMPLOYEE')")
     public ModelAndView getProductCreationPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -63,6 +66,7 @@ public class ProductController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('EMPLOYEE')")
     public ModelAndView addNewProduct(@AuthenticationPrincipal UserAuthDetails userAuthDetails,
                                       @Valid CreateProductRequest createProductRequest,
                                       BindingResult bindingResult) {
@@ -81,6 +85,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}/edit")
+    @PreAuthorize("hasRole('EMPLOYEE')")
     public ModelAndView getProductEditPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails, @PathVariable UUID id) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -96,6 +101,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}/edit")
+    @PreAuthorize("hasRole('EMPLOYEE')")
     public ModelAndView editProduct(@AuthenticationPrincipal UserAuthDetails userAuthDetails,
                                     @Valid EditProductRequest editProductRequest,
                                     BindingResult bindingResult,
@@ -119,6 +125,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}/delete")
+    @PreAuthorize("hasRole('EMPLOYEE')")
     public String deleteProduct(@PathVariable UUID id) {
 
         Product product = productService.getProductById(id);

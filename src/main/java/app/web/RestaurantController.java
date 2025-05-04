@@ -8,6 +8,7 @@ import app.user.service.UserService;
 import app.web.dto.CreateRestaurantRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/categories/{brandId}/location/{location}")
+    @PreAuthorize("hasRole('EMPLOYEE') or hasRole('CUSTOMER')")
     public ModelAndView showCategoriesPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails, @PathVariable UUID brandId, @PathVariable String location) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -50,6 +52,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasRole('EMPLOYEE')")
     public ModelAndView getRestaurantCreationPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -63,6 +66,7 @@ public class RestaurantController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('EMPLOYEE')")
     public ModelAndView addNewRestaurant(@AuthenticationPrincipal UserAuthDetails userAuthDetails,
                                       @Valid CreateRestaurantRequest createRestaurantRequest,
                                       BindingResult bindingResult) {

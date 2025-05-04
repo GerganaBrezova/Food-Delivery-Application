@@ -9,6 +9,7 @@ import app.user.model.Courier;
 import app.user.model.User;
 import app.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,7 @@ public class OrderController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ModelAndView getOrdersPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -47,6 +49,7 @@ public class OrderController {
     }
 
     @GetMapping("/courier")
+    @PreAuthorize("hasRole('COURIER')")
     public ModelAndView getCourierOrdersPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         Courier user = (Courier) userService.getUserById(userAuthDetails.getId());
@@ -61,6 +64,7 @@ public class OrderController {
     }
 
     @GetMapping("/basket")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ModelAndView getBasketPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -105,6 +109,7 @@ public class OrderController {
     }
 
     @GetMapping("/success")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ModelAndView getSuccessPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -131,6 +136,7 @@ public class OrderController {
     }
 
     @GetMapping("/awaiting")
+    @PreAuthorize("hasRole('COURIER')")
     public ModelAndView getAwaitingOrdersPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         User user = userService.getUserById(userAuthDetails.getId());
@@ -160,6 +166,7 @@ public class OrderController {
     }
 
     @GetMapping("/details")
+    @PreAuthorize("hasRole('COURIER')")
     public ModelAndView getOrderDetailsPage(@AuthenticationPrincipal UserAuthDetails userAuthDetails) {
 
         Courier user = (Courier) userService.getUserById(userAuthDetails.getId());

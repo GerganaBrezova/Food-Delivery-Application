@@ -7,6 +7,7 @@ import app.user.model.Employee;
 import app.user.model.User;
 import app.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@PreAuthorize("hasRole('EMPLOYEE')")
 public class EmployeeController {
 
     private final UserService userService;

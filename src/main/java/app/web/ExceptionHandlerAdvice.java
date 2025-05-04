@@ -66,15 +66,6 @@ public class ExceptionHandlerAdvice {
         return "redirect:/orders/basket";
     }
 
-//    @ExceptionHandler(OrderNotFound.class)
-//    public String handleOrderNotFound(RedirectAttributes redirectAttributes, OrderNotFound orderNotFound) {
-//
-//        String message = orderNotFound.getMessage();
-//        redirectAttributes.addFlashAttribute("orderNotFoundMessage", message);
-//
-//        return "redirect:/orders/basket";
-//    }
-
     @ExceptionHandler(UsernameAlreadyExists.class)
     public String handleUsernameAlreadyExists(RedirectAttributes redirectAttributes,
                                               UsernameAlreadyExists usernameException,
@@ -107,23 +98,6 @@ public class ExceptionHandlerAdvice {
 
         return "redirect:/register";
     }
-
-//    @ExceptionHandler(UserNotFound.class)
-//    public ModelAndView handleUserNotFoundException(UserNotFound userNotFoundException) {
-//
-//        ModelAndView modelAndView = new ModelAndView("users");
-//
-//        return modelAndView;
-//    }
-
-//    @ExceptionHandler(ProductsNotFound.class)
-//    public String handleProductsNotFoundException(RedirectAttributes redirectAttributes, ProductsNotFound productsNotFoundException) {
-//
-//        String message = "There are no products available.";
-//        redirectAttributes.addFlashAttribute("productsNotFoundMessage", message);
-//
-//        return "redirect:/products";
-//    }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({
