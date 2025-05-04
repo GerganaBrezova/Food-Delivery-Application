@@ -22,14 +22,19 @@
         <br>
         <br>
         <h2 class="welcome-text"
-            th:utext="${user.role.name() != 'COURIER' ? 'It’s time to power up your day with flavor and focus.<br>Grab your coffee (or pizza?) and let’s get things rolling.'
-            : 'Fuel up and hit the road—deliveries await! 🚚<br>Let’s move fast, stay sharp, and make every stop count.'}">
+            th:utext="${user.role.name() == 'COURIER' ?
+            'Fuel up and hit the road—deliveries await! 🚚<br>Let’s move fast, stay sharp, and make every stop count.' :
+            (user.role.name() == 'EMPLOYEE' ?
+            'Great things happen behind the scenes. 🧠<br>Track, support, and optimize—we count on you to keep the wheels turning.' :
+            'It’s time to power up your day with flavor and focus. ☕🍕<br>Grab your coffee (or pizza?) and let’s get things rolling.')}">
         </h2>
+
         <br>
         <br>
         <nav class="header-nav">
             <a th:href="@{/home}" class="nav-button"><i class="fas fa-home"></i> Home</a>
-            <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-shopping-basket"></i> Basket</a>
+            <a th:href="@{/orders/basket}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i
+                    class="fas fa-shopping-basket"></i> Basket</a>
             <a th:href="@{/company/statistics}" class="nav-button" th:if="${user.role.name() == 'EMPLOYEE'}">
                 <i class="fas fa-chart-bar"></i>
                 Statistics
@@ -50,8 +55,10 @@
                 <i class="fa-solid fa-clock-rotate-left"></i>
                 History
             </a>
-            <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i class="fas fa-receipt"></i> Orders</a>
-            <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i> Profile</a>
+            <a th:href="@{/orders}" class="nav-button" th:if="${user.role.name() == 'CUSTOMER'}"><i
+                    class="fas fa-receipt"></i> Orders</a>
+            <a th:href="@{'/user/' + ${user.id} + '/profile'}" class="nav-button"><i class="fas fa-user"></i>
+                Profile</a>
         </nav>
 
     </div>

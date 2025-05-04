@@ -34,7 +34,7 @@
     <div class="cart-summary">
         <div class="summary-row">
             <span>Total products:</span>
-            <span th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></span>
+            <span th:text="'$' + ${#numbers.formatDecimal(order.totalPrice.subtract(5), 1, 'COMMA', 2, 'POINT')}"></span>
         </div>
         <div class="summary-row" th:if="${order.totalPrice > 0}">
             <span>Delivery fee:</span>
