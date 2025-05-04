@@ -22,7 +22,7 @@
         <br>
         <br>
         <h2 class="welcome-text"
-            th:utext="${user.role != 'COURIER' ? 'It’s time to power up your day with flavor and focus.<br>Grab your coffee (or pizza?) and let’s get things rolling.'
+            th:utext="${user.role.name() != 'COURIER' ? 'It’s time to power up your day with flavor and focus.<br>Grab your coffee (or pizza?) and let’s get things rolling.'
             : 'Fuel up and hit the road—deliveries await! 🚚<br>Let’s move fast, stay sharp, and make every stop count.'}">
         </h2>
         <br>

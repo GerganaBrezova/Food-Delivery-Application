@@ -153,8 +153,8 @@ public class OrderController {
         orderService.acceptOrder(order, courier);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("orders-list");
         modelAndView.addObject("order", order);
+        modelAndView.setViewName("redirect:/orders/awaiting");
 
         return modelAndView;
     }

@@ -18,10 +18,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -51,6 +48,7 @@ public class OrderService {
                     .status(OrderStatus.PENDING)
                     .createdOn(LocalDateTime.now())
                     .totalPrice(DELIVERY_FEE)
+                    .products(new ArrayList<>())
                     .build();
 
             return orderRepository.save(order);
@@ -150,13 +148,20 @@ public class OrderService {
             order.setStatus(OrderStatus.PICKED_UP);
         } else if (order.getStatus() == OrderStatus.PICKED_UP) {
             order.setStatus(OrderStatus.DELIVERED);
-            courier.setGeneratedTurnover(courier.getGeneratedTurnover().add(order.getTotalPrice()));
-            checkForBonus(courier);
-            courier.getCompletedOrders().add(order);
-            userService.saveUser(courier);
+            updateCourierDetailsAfterDelivery(order, courier);
         }
-
         orderRepository.save(order);
+    }
+
+    private void updateCourierDetailsAfterDelivery(Order order, Courier courier) {
+
+        courier.setGeneratedTurnover(courier.getGeneratedTurnover().add(order.getTotalPrice()));
+        checkForBonus(courier);
+
+        order.setDeliveredBy(courier);
+        courier.getCompletedOrders().add(order);
+
+        userService.saveUser(courier);
     }
 
     private static void checkForBonus(Courier courier) {
@@ -178,8 +183,13 @@ public class OrderService {
     }
 
     public void deleteCourierAcceptedOrder(Courier courier) {
+
+        Order acceptedOrder = courier.getAcceptedOrder();
+
+        acceptedOrder.setResponsibleCourier(null);
         courier.setAcceptedOrder(null);
 
+        orderRepository.save(acceptedOrder);
         userService.saveUser(courier);
     }
 }
