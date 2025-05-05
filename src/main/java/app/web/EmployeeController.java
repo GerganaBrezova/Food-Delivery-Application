@@ -1,9 +1,7 @@
 package app.web;
 
 import app.security.UserAuthDetails;
-import app.user.model.Courier;
 import app.user.model.Customer;
-import app.user.model.Employee;
 import app.user.model.User;
 import app.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

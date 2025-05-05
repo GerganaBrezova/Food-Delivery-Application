@@ -1,10 +1,7 @@
 package app.web;
 
 import app.order.model.Order;
-import app.user.model.Courier;
-import app.user.model.Employee;
-import app.user.model.User;
-import app.user.model.UserRole;
+import app.user.model.*;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
@@ -63,5 +60,14 @@ public class TestBuilder {
                 .build();
 
         return new ArrayList<>(List.of(firstCourier, secondCourier));
+    }
+
+    public static List<Customer> testCustomersList() {
+
+        Customer firstCustomer = Customer.builder().build();
+
+        Customer secondCustomer = Customer.builder().build();
+
+        return new ArrayList<>(List.of(firstCustomer, secondCustomer));
     }
 }
