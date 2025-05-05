@@ -1,15 +1,14 @@
 package app.web;
 
+import app.company.model.Company;
 import app.order.model.Order;
+import app.restaurant.model.Restaurant;
 import app.user.model.*;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @UtilityClass
 public class TestBuilder {
@@ -69,5 +68,25 @@ public class TestBuilder {
         Customer secondCustomer = Customer.builder().build();
 
         return new ArrayList<>(List.of(firstCustomer, secondCustomer));
+    }
+
+    public static List<Company> testCompaniesList() {
+
+        Company firstCompany = Company.builder().build();
+
+        Company secondCompany = Company.builder().build();
+
+        return new ArrayList<>(List.of(firstCompany, secondCompany));
+    }
+
+    public static Map<UUID, List<Restaurant>> testRestaurantsMap() {
+
+        Map<UUID, List<Restaurant>> restaurantsMap = new HashMap<>();
+
+        restaurantsMap.put(UUID.randomUUID(), List.of(Restaurant.builder().build()));
+
+        restaurantsMap.put(UUID.randomUUID(), List.of(Restaurant.builder().build()));
+
+        return restaurantsMap;
     }
 }
