@@ -101,9 +101,7 @@ public class CompanyController {
                 ? userService.getCouriersByOrderCompletionDate(from, to)
                 : userService.getAllCouriers();
 
-        BigDecimal totalRevenue = filteredCouriers.stream()
-                .map(Courier::getGeneratedTurnover)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal totalRevenue = companyService.getTotalRevenue(filteredCouriers);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("statistics");

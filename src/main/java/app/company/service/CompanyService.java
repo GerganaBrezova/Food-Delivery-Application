@@ -4,10 +4,12 @@ import app.company.model.Company;
 import app.company.repository.CompanyRepository;
 import app.exceptions.CompanyNotFound;
 import app.restaurant.model.Restaurant;
+import app.user.model.Courier;
 import app.web.dto.CreateCompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,5 +84,11 @@ public class CompanyService {
 
     public void deleteCompany(Company company) {
         companyRepository.delete(company);
+    }
+
+    public BigDecimal getTotalRevenue(List<Courier> filteredCouriers) {
+        return filteredCouriers.stream()
+                .map(Courier::getGeneratedTurnover)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
