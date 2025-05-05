@@ -13,9 +13,9 @@ import java.util.*;
 @UtilityClass
 public class TestBuilder {
 
-    public static User testEmployee() {
+    public static Employee testEmployee() {
 
-        Employee employee = Employee.builder()
+        return Employee.builder()
                 .id(UUID.randomUUID())
                 .username("employee_user")
                 .email("employee_user@gmail.com")
@@ -26,8 +26,40 @@ public class TestBuilder {
                 .isActive(true)
                 .hiredCouriers(new HashSet<>())
                 .build();
+    }
 
-       return employee;
+    public static Customer testCustomer() {
+
+        return Customer.builder()
+                .id(UUID.randomUUID())
+                .username("customer_user")
+                .email("customer_user@gmail.com")
+                .firstName("Customer")
+                .lastName("User")
+                .createdOn(LocalDateTime.now())
+                .role(UserRole.CUSTOMER)
+                .isActive(true)
+                .orders(new ArrayList<>(List.of(new Order())))
+                .build();
+    }
+
+    public static Courier testCourier() {
+
+        return Courier.builder()
+                .id(UUID.randomUUID())
+                .username("courier_user")
+                .email("courier_user@gmail.com")
+                .firstName("Courier")
+                .lastName("User")
+                .createdOn(LocalDateTime.now())
+                .role(UserRole.COURIER)
+                .isActive(true)
+                .generatedTurnover(BigDecimal.valueOf(100))
+                .hiredOn(LocalDateTime.now())
+                .acceptedOrder(new Order())
+                .completedOrders(new ArrayList<>(List.of(new Order())))
+                .hiredBy(testEmployee())
+                .build();
     }
 
     public static List<Courier> testCouriersList() {
