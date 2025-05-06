@@ -1,8 +1,6 @@
 package app.web;
 
-import app.exceptions.EmailAlreadyExists;
 import app.exceptions.NoAddressSelected;
-import app.exceptions.OrderAlreadyPickedUp;
 import app.exceptions.OrderHasNoProducts;
 import app.order.model.Order;
 import app.order.model.OrderStatus;
@@ -10,7 +8,6 @@ import app.order.service.OrderService;
 import app.product.model.Product;
 import app.product.service.ProductService;
 import app.security.UserAuthDetails;
-import app.user.model.Courier;
 import app.user.model.UserRole;
 import app.user.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -450,34 +447,101 @@ public class OrderControllerApiTest {
         verify(orderService, times(1)).acceptOrder(any(), any());
     }
 
-//    @Test
-//    void putAuthenticatedRequestToOrderAcceptPageWhenOrderAlreadyPickedUp_thenThrowOrderAlreadyPickedUpException() throws Exception {
-//
-//        Order order = Order.builder()
-//                .id(UUID.randomUUID())
-//                .status(OrderStatus.COURIER_FOUND)
-//                .responsibleCourier(new Courier())
-//                .build();
-//
-//        when(userService.getUserById(any())).thenReturn(testCourier());
-//        when(orderService.getOrderById(any())).thenReturn(order);
-//        doThrow(new OrderAlreadyPickedUp("Another courier is responsible for this order!")).when(orderService).acceptOrder(order, testCourier());
-//
-//        UUID userId = UUID.randomUUID();
-//        UserAuthDetails principal = new UserAuthDetails(userId, "courier_user", "123456", "courier_user@gmail.com", "Courier", "User", UserRole.COURIER, true);
-//
-//        MockHttpServletRequestBuilder request = put("/orders/{orderId}/accept", order.getId())
-//                .with(user(principal))
-//                .with(csrf());;
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/orders/awaiting"))
-//                .andExpect(model().attributeExists("order"))
-//                .andExpect(flash().attributeExists("orderAlreadyPickedUpMessage"));
-//
-//        verify(userService, times(1)).getUserById(userId);
-//        verify(orderService, times(1)).getOrderById(order.getId());
-//        verify(orderService, times(1)).acceptOrder(any(), any());
-//    }
+    @Test
+    void getAuthenticatedRequestToAcceptedOrderPage_thenReturnAcceptedOrderView() throws Exception {
+
+        when(userService.getUserById(any())).thenReturn(testCourier());
+
+        UUID userId = UUID.randomUUID();
+        UserAuthDetails principal = new UserAuthDetails(userId, "courier_user", "123456", "courier_user@gmail.com", "Courier", "User", UserRole.COURIER, true);
+
+        MockHttpServletRequestBuilder request = get("/orders/details")
+                .with(user(principal));
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(view().name("order-accepted"))
+                .andExpect(model().attributeExists("user", "order"));
+
+        verify(userService, times(1)).getUserById(userId);
+    }
+
+    @Test
+    void getUnauthenticatedRequestToAcceptedOrderPage_thenRedirectToLogin() throws Exception {
+
+        MockHttpServletRequestBuilder request = get("/orders/details");
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost/login"));
+
+        verify(userService, never()).getUserById(any());
+    }
+
+    @Test
+    void putAuthenticatedRequestToChangeOrderStatus_thenReturnAcceptedOrderPage() throws Exception {
+
+        when(userService.getUserById(any())).thenReturn(testCourier());
+
+        UUID userId = UUID.randomUUID();
+        UserAuthDetails principal = new UserAuthDetails(userId, "courier_user", "123456", "courier_user@gmail.com", "Courier", "User", UserRole.COURIER, true);
+
+        MockHttpServletRequestBuilder request = put("/orders/change-status")
+                .with(user(principal))
+                .with(csrf());;
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(view().name("order-accepted"))
+                .andExpect(model().attributeExists("user", "order"));
+
+        verify(userService, times(1)).getUserById(userId);
+        verify(orderService, times(1)).changeOrderStatus(any(), any());
+    }
+
+    @Test
+    void getUnauthenticatedRequestToChangeOrderStatusPage_thenRedirectToLogin() throws Exception {
+
+        MockHttpServletRequestBuilder request = get("/orders/change-status");
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost/login"));
+
+        verify(userService, never()).getUserById(any());
+        verify(orderService, never()).changeOrderStatus(any(), any());
+    }
+
+    @Test
+    void deleteAuthenticatedRequestToAcceptedOrderCleanPage_thenRedirectToAcceptedOrderPage() throws Exception {
+
+        when(userService.getUserById(any())).thenReturn(testCourier());
+
+        UUID userId = UUID.randomUUID();
+        UserAuthDetails principal = new UserAuthDetails(userId, "courier_user", "123456", "courier_user@gmail.com", "Courier", "User", UserRole.COURIER, true);
+
+        MockHttpServletRequestBuilder request = delete("/orders/clean")
+                .with(user(principal))
+                .with(csrf());
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/orders/details"));
+
+        verify(userService, times(1)).getUserById(userId);
+        verify(orderService, times(1)).deleteCourierAcceptedOrder(any());
+    }
+
+    @Test
+    void deleteUnauthenticatedRequestToCAcceptedOrderCleanPage_thenRedirectToLogin() throws Exception {
+
+        MockHttpServletRequestBuilder request = get("/orders/clean");
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost/login"));
+
+        verify(userService, never()).getUserById(any());
+        verify(orderService, never()).deleteCourierAcceptedOrder(any());
+    }
 }

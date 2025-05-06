@@ -2,6 +2,7 @@ package app.web;
 
 import app.company.model.Company;
 import app.order.model.Order;
+import app.order.model.OrderStatus;
 import app.restaurant.model.Restaurant;
 import app.user.model.*;
 import lombok.experimental.UtilityClass;
@@ -45,6 +46,10 @@ public class TestBuilder {
 
     public static Courier testCourier() {
 
+        Order order = Order.builder()
+                .status(OrderStatus.COURIER_FOUND)
+                .build();
+
         return Courier.builder()
                 .id(UUID.randomUUID())
                 .username("courier_user")
@@ -56,7 +61,7 @@ public class TestBuilder {
                 .isActive(true)
                 .generatedTurnover(BigDecimal.valueOf(100))
                 .hiredOn(LocalDateTime.now())
-                .acceptedOrder(new Order())
+                .acceptedOrder(order)
                 .completedOrders(new ArrayList<>(List.of(new Order())))
                 .hiredBy(testEmployee())
                 .build();
