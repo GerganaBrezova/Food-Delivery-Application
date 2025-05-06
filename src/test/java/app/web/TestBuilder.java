@@ -3,6 +3,8 @@ package app.web;
 import app.company.model.Company;
 import app.order.model.Order;
 import app.order.model.OrderStatus;
+import app.product.model.Product;
+import app.product.model.ProductCategory;
 import app.restaurant.model.Restaurant;
 import app.user.model.*;
 import lombok.experimental.UtilityClass;
@@ -125,5 +127,22 @@ public class TestBuilder {
         restaurantsMap.put(UUID.randomUUID(), List.of(Restaurant.builder().build()));
 
         return restaurantsMap;
+    }
+
+    public static List<Product> testProductList() {
+
+        Product firstProduct = Product.builder()
+                .id(UUID.randomUUID())
+                .category(ProductCategory.DESSERT)
+                .restaurants(List.of(Restaurant.builder().address("Sofia").build()))
+                .build();
+
+        Product secondProduct = Product.builder()
+                .id(UUID.randomUUID())
+                .category(ProductCategory.DESSERT)
+                .restaurants(List.of(Restaurant.builder().address("Sofia").build()))
+                .build();
+
+        return new ArrayList<>(List.of(firstProduct, secondProduct));
     }
 }
