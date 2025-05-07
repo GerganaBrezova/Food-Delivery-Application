@@ -17,7 +17,7 @@
     <h2 class="profile-title">Edit Your Profile</h2>
 
     <br>
-    <form th:action="@{'/user/' + ${user.id} + '/profile'}" th:method="PUT" th:object="${editProfileRequest}">
+    <form th:action="@{'/user/' + ${user.id} + '/profile/edit'}" th:method="PUT" th:object="${editProfileRequest}">
         <div class="profile-info">
 
             <div class="field">

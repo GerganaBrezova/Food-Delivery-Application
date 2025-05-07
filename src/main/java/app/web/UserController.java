@@ -42,7 +42,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @PutMapping("/{id}/profile")
+    @PutMapping("/{id}/profile/edit")
     public ModelAndView editUserProfile(@PathVariable UUID id, @Valid EditProfileRequest editProfileRequest, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
