@@ -145,4 +145,12 @@ public class TestBuilder {
 
         return new ArrayList<>(List.of(firstProduct, secondProduct));
     }
+
+    public static Company testCompany() {
+
+        return Company.builder()
+                .id(UUID.randomUUID())
+                .name("Company Name")
+                .build();
+    }
 }
