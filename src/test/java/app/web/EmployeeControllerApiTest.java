@@ -12,8 +12,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 import java.util.UUID;
 
-import static app.web.TestBuilder.testCustomersList;
-import static app.web.TestBuilder.testEmployee;
+import static app.TestBuilder.testCustomersList;
+import static app.TestBuilder.testEmployee;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;

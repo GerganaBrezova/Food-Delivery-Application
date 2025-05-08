@@ -1,15 +1,12 @@
 package app.user.service;
 
 import app.exceptions.*;
-import app.order.model.Order;
 import app.security.UserAuthDetails;
 import app.user.model.*;
 import app.user.repository.CourierRepository;
-import app.user.repository.CustomerRepository;
 import app.user.repository.UserRepository;
 import app.web.dto.EditProfileRequest;
 import app.web.dto.RegisterRequest;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,23 +29,25 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final CourierRepository courierRepository;
-    private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, CourierRepository courierRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, CourierRepository courierRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.courierRepository = courierRepository;
-        this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User %s was not found.".formatted(username)));
+        User user = getUserByUsername(username);
 
         return new UserAuthDetails(user.getId(), username, user.getPassword(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getRole(), user.isActive());
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User %s was not found.".formatted(username)));
     }
 
     @Transactional

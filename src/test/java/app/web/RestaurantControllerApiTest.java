@@ -1,7 +1,6 @@
 package app.web;
 
 import app.company.model.Company;
-import app.product.model.ProductCategory;
 import app.restaurant.service.RestaurantService;
 import app.security.UserAuthDetails;
 import app.user.model.UserRole;
@@ -15,7 +14,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 import java.util.UUID;
 
-import static app.web.TestBuilder.*;
+import static app.TestBuilder.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;

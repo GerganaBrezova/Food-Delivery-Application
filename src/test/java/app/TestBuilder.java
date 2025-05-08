@@ -1,4 +1,4 @@
-package app.web;
+package app;
 
 import app.company.model.Company;
 import app.order.model.Order;
@@ -133,7 +133,10 @@ public class TestBuilder {
 
         Product firstProduct = Product.builder()
                 .id(UUID.randomUUID())
+                .name("Dubai chocolate")
+                .price(BigDecimal.TEN)
                 .category(ProductCategory.DESSERT)
+                .imageUrl("https://www.google.com")
                 .restaurants(List.of(Restaurant.builder().address("Sofia").build()))
                 .build();
 

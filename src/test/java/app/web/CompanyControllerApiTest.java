@@ -1,9 +1,7 @@
 package app.web;
 
 import app.company.service.CompanyService;
-import app.order.model.Order;
 import app.security.UserAuthDetails;
-import app.user.model.Courier;
 import app.user.model.UserRole;
 import app.user.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -17,8 +15,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static app.web.TestBuilder.testCouriersList;
-import static app.web.TestBuilder.testEmployee;
+import static app.TestBuilder.testCouriersList;
+import static app.TestBuilder.testEmployee;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
