@@ -42,7 +42,7 @@
         </div>
         <div class="summary-row total">
             <span>Total to pay:</span>
-            <span th:if="${order.totalPrice > 0}" th:text="'$' + ${#numbers.formatDecimal(order.totalPrice.add(5), 1, 'COMMA', 2, 'POINT')}"></span>
+            <span th:if="${order.totalPrice > 0}" th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></span>
             <span th:if="${order.totalPrice == 0}" th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 'COMMA', 2, 'POINT')}"></span>
         </div>
         <p class="payment-note">* We only accept cash on delivery *</p>
