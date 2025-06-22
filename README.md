@@ -19,26 +19,18 @@ Key Features:
 
 Technologies Used
 
-Spring Boot: For backend development and handling business logic.
-
-Thymeleaf: For rendering dynamic HTML content.
-
-JPA (Java Persistence API): For database interaction.
-
-Spring Security: For managing user authentication and authorization.
-
-MySQL: For database management.
-
-Lombok: For reducing boilerplate code.
+- Spring Boot: For backend development and handling business logic.
+- Thymeleaf: For rendering dynamic HTML content.
+- JPA (Java Persistence API): For database interaction.
+- Spring Security: For managing user authentication and authorization.
+- MySQL: For database management.
+- Lombok: For reducing boilerplate code.
 
 ------
 
 Usage
 
-Login: Users can log in as customers, employees, or delivery staff, with each role having specific permissions.
-
-Customer: Browse the food menu, filter by categories, and place orders.
-
-Employee: Manage restaurants, products, and view company turnover reports.
-
-Courier: Accept and complete delivery orders, change delivery status.
+- Login: Users can log in as customers, employees, or delivery staff, with each role having specific permissions.
+- Customer: Browse the food menu, filter by categories, and place orders.
+- Employee: Manage restaurants, products, and view company turnover reports.
+- Courier: Accept and complete delivery orders, change delivery status.
